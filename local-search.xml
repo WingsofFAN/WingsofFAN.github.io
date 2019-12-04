@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>caffe(初识2)</title>
+    <link href="undefinedundefined/caffe-19-12-04/2019/12/04/"/>
+    <url>undefined/caffe-19-12-04/2019/12/04/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    <categories>
+      
+      <category>21天实战caffe</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>caffe</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>caffe(初识1)</title>
+    <link href="undefinedundefined/caffe-19-12-03/2019/12/03/"/>
+    <url>undefined/caffe-19-12-03/2019/12/03/</url>
+    
+    <content type="html"><![CDATA[<h1 id="模型定义"><a href="#模型定义" class="headerlink" title="模型定义"></a>模型定义</h1><p>学习框架最基础的就是学该框架如何定义一个神经网络，所以开始先感受一下caffe是如何定义一个网络的。<br>此处为LeNet-5模型运用于minist数据集上时，网络的定义文件。</p><pre><code>name: &quot;LeNet&quot;             //网络的名称layer {                   //定义一个层    name: &quot;mnist&quot;         //层的名称为mnist    type: &quot;Data&quot;          //层的类型为数据层    top: &quot;data&quot;           //层的输出blob有两个： data和label    top: &quot;label&quot;    include {        phase: TRAIN      //该层参数只在训练阶段有效    }    transform_param {        scale: 0.00390625 //数据变换使用的缩放因子    }    data_param {          //数据层参数        source: &quot;examples/mnist/mnist_train_lmdb&quot; //LMDB的路径        batch_size: 64    //批量数目，一次读取64张图        backend: LMDB     //数据格式为LMDB    }}layer {                   //定义一个新的层    name: &quot;mnist&quot;         //名称和上一个层相同，但是参数却不同    type: &quot;Data&quot;    top: &quot;data&quot;    top: &quot;label&quot;    include {        phase: TEST       //且该层参数只在测试阶段使用    }    transform_param {        scale: 0.00390625    }    data_param {        source: &quot;examples/mnist/mnist_train_lmdb&quot;        batch_size: 100        backend: LMDB    }}layer {    name: &quot;conv1&quot;    type: &quot;Convolution&quot;      //该层的类型为卷积层     bottom: &quot;data&quot;           //bottom 为该层的输入接口，    top: &quot;conv1&quot;                 }    param {        lr_mult: 1           //权值（即W）学习速率倍乘因子，“1”表示保持与全局一致     }    param {        lr_mult: 2           //偏置（即B）学习速率倍乘因子，“2”表示在全局参数上乘2    }    convolution_param{       //卷积层参数设置        num_output: 20       //输出通道数        kernel_size: 5       //使用卷积核大小         stride: 1            //卷积步长        weight_filler{            type: &quot;xavier&quot;   //卷积核W初始化方式        }        bias_filler {            type: &quot;constant&quot; //偏置B初始化方式        }    }}layer {    name: &quot;pool1&quot;        type: &quot;Pooling&quot;          //池化层            bottom: &quot;conv1&quot;    top: &quot;pool1&quot;    pooling_param{           //池化层参数设置        pool: MAX            //池化方式        kernel_size: 2        stride: 2    }}layer {    name: &quot;conv2&quot;    type: &quot;Convolution&quot;    bottom: &quot;pool1&quot;    top: &quot;conv2&quot;    param {        lr_mult: 1    }    param {        lr_mult: 2    }    convolution_param {        num_output: 50        kernel_size: 5        stride: 1        weight_filler {            type: &quot;xavier&quot;        }        bias_filler {            type: &quot;constant&quot;        }    }}layer {    name: &quot;pool2&quot;    type: &quot;Pooling&quot;    bottom: &quot;conv2&quot;    top: &quot;pool2&quot;    pooling_param {        pool: MAX        kernel_size: 2        stride: 2    }}layer {    name: &quot;ip1&quot;    type: &quot;InnerProduct&quot;     //全连接层    bottom: &quot;pool2&quot;    top: &quot;ip1&quot;    param {        lr_mult: 1    }    param {        lr_mult: 2    }    inner_product_param {    //全连接层参数设置        num_output: 500      //全连接层输出的元素个数        weght_filler {            type: &quot;xavier&quot;        }        bias_filler {            type: &quot;constant&quot;        }    }}layer {    name: &quot;relu1&quot;           //激活函数relu    type: &quot;ReLU&quot;                 bottom: &quot;ip1&quot;    top: &quot;ip1&quot;}layer {    name: &quot;ip2&quot;    type: &quot;InnerProduct&quot;    bottom: &quot;ip1&quot;    top: &quot;ip2&quot;    param {        lr_mult: 1    }    param {        lr_mult: 2    }    inner_product_param {        num_output: 10        weight_filler {            type: &quot;xavier&quot;        }        bias_filler {            type: &quot;constant&quot;        }    }}layer{                      name: &quot;accuracy&quot;       //准确率层          type: &quot;Accuracy&quot;    bottom: &quot;ip2&quot;          //有两个输入分别为标签label和结果ip2    bottom: &quot;label&quot;        //用于计算分类的准确率    top： &quot;accuracy&quot;    include {        phase: TEST        //只在测试阶段使用    }}layer {     name: &quot;loss&quot;          //损失函数层    type: &quot;SoftmaxWithLoss&quot;   //损失函数计算方式    bottom: &quot;ip2&quot;    bottom: &quot;label&quot;    top： &quot;loss&quot;}</code></pre><ul><li>基本输出接口的名称都和此层的名称相同</li><li>和其他几种框架相比caffe定义层时，不需要指定输入特征图的大小</li></ul><h1 id="训练脚本配置"><a href="#训练脚本配置" class="headerlink" title="训练脚本配置"></a>训练脚本配置</h1><p>训练脚本和超参配置，还是以Lenet5在minist数据集上的例子来做展示。</p><pre><code># 用于训练/预测的网络描述文件（protobuffer 文本格式）即为上一篇中的代码net: &quot;examples/mnist/lenet_train_test.prototxt&quot;# 预测阶段迭代次数。在MNIST下，预测样本组（test batch）大小为100，# 这里设置预测阶段迭代次数为100可以覆盖全部10000张测试集test_iter: 100# 训练时每迭代500次，进行一次预测test_interval: 500# 网络的基础学习速率、冲量和权衰量base_lr: 0.01momentum: 0.9weight_decay: 0.0005# 学习速率的衰减策略lr_policy: &quot;inv&quot;gamma: 0.0001power: 0.75# 每经过100次迭代，在屏幕上打印一次运行LOGdisplay: 100# 最大迭代次数max_iter: 10000# 每5000次迭代打一次快照 存放在 examples/mnist/lenet 目录下snapshot: 5000snapshot_prefix: &quot;examples/mnist/lenet&quot;# Caffe 求解模式为CPU模式。solver_mode: CPU</code></pre><p>至此我们已经很粗略地见识了caffe框架中最重要的两个文件。<br>接下来我们会在实战中，对这两个文件中具体的参数配置和使用进行学习。<br>但在此之前还需要进行一些环境准备和必要知识的了解。</p><hr><blockquote><p>1.caffe 学习资源</p><blockquote><ul><li><a href="http://caffe.berkeleyvision.org/" target="_blank" rel="noopener">官方主页</a></li><li><a href="http://caffecn.cn/" target="_blank" rel="noopener">中文社区</a></li></ul><p>2.Caffe 环境配置（Ubuntu）<br>3.Caffe 数据集制作</p></blockquote></blockquote><hr>]]></content>
+    
+    
+    <categories>
+      
+      <category>21天实战caffe</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>caffe</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Markdown 基础使用简介</title>
+    <link href="undefinedundefined/markdown-19-12-02/2019/12/02/"/>
+    <url>undefined/markdown-19-12-02/2019/12/02/</url>
+    
+    <content type="html"><![CDATA[<p><img src="/undefined/markdown-19-12-02/2019/12/02/Markdown.jpg" srcset="/img/loading.gif" alt="Markdown"></p><h1 id="标题设置"><a href="#标题设置" class="headerlink" title="标题设置"></a>标题设置</h1><h2 id="用‘-’设置"><a href="#用‘-’设置" class="headerlink" title="用‘#’设置"></a>用‘#’设置</h2><pre><code># 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题</code></pre><blockquote><h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6></blockquote><h2 id="用‘-’和‘-’设置"><a href="#用‘-’和‘-’设置" class="headerlink" title="用‘-’和‘=’设置"></a>用‘-’和‘=’设置</h2><pre><code>一级标题=====================二级标题---------------------</code></pre><p>只能标记出一级和二级标题</p><h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><pre><code>*斜体文本*_斜体文本_**粗体文本**__粗体文本__***粗斜体文本***___粗斜体文本___</code></pre><blockquote><p><em>斜体文本</em><br><em>斜体文本</em><br><strong>粗体文本</strong><br><strong>粗体文本</strong><br><strong><em>粗斜体文本</em></strong><br><strong><em>粗斜体文本</em></strong>        </p></blockquote><h1 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h1><pre><code>**** * ******- - ----------</code></pre><blockquote><hr><hr><hr><hr><hr></blockquote><h1 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h1><pre><code>没被删除~~被删除~~</code></pre><blockquote><p>没被删除<br><del>被删除</del></p></blockquote><h1 id="下划线"><a href="#下划线" class="headerlink" title="下划线"></a>下划线</h1><pre><code>&lt;u&gt;带下划线文本&lt;/u&gt;</code></pre><blockquote><p><u>带下划线文本</u></p></blockquote><h1 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h1><pre><code>你看不懂[^RUNOOB][^RUNOOB]：看不懂，读注释你也看不懂！</code></pre><blockquote><p>你看不懂[^RUNOOB]<br>[^RUNOOB]:看不懂，读注释你也看不懂！</p></blockquote><h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><pre><code>* 第一项* 第二项* 第三项+ 第一项+ 第二项+ 第三项- 第一项- 第二项- 第三项</code></pre><blockquote><ul><li>第一项</li><li>第二项</li><li>第三项</li></ul><ul><li>第一项</li><li>第二项</li><li>第三项</li></ul><ul><li>第一项</li><li>第二项</li><li>第三项</li></ul></blockquote><h1 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h1><pre><code>&gt;最外层&gt;&gt;第一层嵌套&gt;&gt;&gt;第二层嵌套</code></pre><blockquote><p>最外层</p><blockquote><p>第一层嵌套</p><blockquote><p>第二层嵌套</p></blockquote></blockquote></blockquote><h1 id="代码区块"><a href="#代码区块" class="headerlink" title="代码区块"></a>代码区块</h1><p>在每一行前加上四个空格或制表符（Tab）</p><h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><pre><code>回到[主页](https://wingsoffan.github.io/)回到[主页][Link][Link]:https://wingsoffan.github.io/</code></pre><blockquote><p>回到<a href="https://wingsoffan.github.io/" target="_blank" rel="noopener">主页</a><br>回到[主页][Link]<br>[Link]:<a href="https://wingsoffan.github.io" target="_blank" rel="noopener">https://wingsoffan.github.io</a></p></blockquote><h1 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h1><pre><code>![图片](markdown/fan.jpg)</code></pre><blockquote><p><img src="/undefined/markdown-19-12-02/2019/12/02/fan.jpg" srcset="/img/loading.gif" alt="alt 图片"></p></blockquote><h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><pre><code>| 左对齐 | 右对齐 | 居中对齐 || :-----| ----: | :----: || 单元格 | 单元格 | 单元格 || 单元格 | 单元格 | 单元格 |</code></pre><blockquote><table><thead><tr><th align="left">左对齐</th><th align="right">右对齐</th><th align="center">居中对齐</th></tr></thead><tbody><tr><td align="left">单元格</td><td align="right">单元格</td><td align="center">单元格</td></tr><tr><td align="left">单元格</td><td align="right">单元格</td><td align="center">单元格</td></tr></tbody></table></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>blog入门</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Markdown</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="undefinedundefined/hello-world/2019/11/30/"/>
+    <url>undefined/hello-world/2019/11/30/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo server</span></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo generate</span></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
