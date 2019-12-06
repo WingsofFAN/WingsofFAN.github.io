@@ -180,8 +180,7 @@ sudo apt-get install -y libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-co
 sudo apt-get install libffi-dev python-dev build-essential
 sudo apt-get install autoconf automake libtool</code></pre><h3 id="配置gpu"><a href="#配置gpu" class="headerlink" title="配置gpu"></a>配置gpu</h3><h4 id="安装Nvidia显卡驱动"><a href="#安装Nvidia显卡驱动" class="headerlink" title="安装Nvidia显卡驱动"></a>安装Nvidia显卡驱动</h4><h5 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h5><ul>
 <li><p>查看显卡连接，确认显卡硬件正确连接</p>
-<p>  lspci | grep -I nvidia</p>
-</li>
+<pre><code>lspci | grep -I nvidia</code></pre></li>
 <li><p>Nvidia官网下载与系统和显卡版本对应的显卡驱动进行安装，不要使用其他辅助安装工具容易出错</p>
 </li>
 </ul>
@@ -189,103 +188,232 @@ sudo apt-get install autoconf automake libtool</code></pre><h3 id="配置gpu"><a
 <pre><code>sudo apt-get remove --purge nvidia*</code></pre><p>安装一些必要的库</p>
 <pre><code>sudo apt-get update
 sudo apt-get install dkms build-essential linux-headers-generic</code></pre><h5 id="禁用nouveau"><a href="#禁用nouveau" class="headerlink" title="禁用nouveau"></a>禁用nouveau</h5><ul>
-<li><p>打开blacklist.conf, 在最后加入禁用nouveau的设置, 这是一个开源驱动, 如图所示：</p>
-<p>  blacklist nouveau<br>  blacklist lbm-nouveau<br>  options nouveau modeset=0<br>  alias nouveau off<br>  alias lbm-nouveau off</p>
-</li>
-<li><p>禁用nouveau内核模块</p>
-<p>  echo options nouveau modeset=0<br>  sudo update-initramfs -u</p>
-</li>
+<li>打开blacklist.conf, 在最后加入禁用nouveau的设置, 这是一个开源驱动, 如图所示：</li>
+</ul>
+<p>‘’’</p>
+<pre><code>blacklist nouveau
+blacklist lbm-nouveau
+options nouveau modeset=0
+alias nouveau off
+alias lbm-nouveau off</code></pre><p>‘’’</p>
+<ul>
+<li>禁用nouveau内核模块</li>
+</ul>
+<p>‘’’</p>
+<pre><code>echo options nouveau modeset=0
+sudo update-initramfs -u</code></pre><p>‘’’</p>
+<ul>
 <li><p>检查是否禁用成功，<strong>重启后执行以下命令，若无任何打印内容</strong>，则禁用成功</p>
-<p>  lsmod | grep nouveau</p>
-</li>
+<pre><code>lsmod | grep nouveau</code></pre></li>
 </ul>
 <h5 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h5><ul>
 <li><p>首先关闭图形界面</p>
-<p>  sudo systemctl set-default multi-user.target<br>  sudo reboot</p>
-</li>
+<pre><code>sudo systemctl set-default multi-user.target
+sudo reboot</code></pre></li>
 <li><p>执行从官网下载的.run脚本</p>
-<p>  sudo chmod u+x NVIDIA-Linux-x86_64-390.87.run<br>  sudo ./NVIDIA-Linux-x86_64-390.87.run </p>
-</li>
+<pre><code>sudo chmod u+x NVIDIA-Linux-x86_64-390.87.run 
+sudo ./NVIDIA-Linux-x86_64-390.87.run </code></pre></li>
 </ul>
 <p>或是视情况而定</p>
 <pre><code>sudo ./NVIDIA-Linux-x86_64-390.87.run –no-opengl-files</code></pre><ul>
 <li><p>若安装失败 则应先卸载已安装部分</p>
-<p>  sudo ./NVIDIA-Linux-x86_64-390.87.run –uninstall</p>
-</li>
+<pre><code>sudo ./NVIDIA-Linux-x86_64-390.87.run –uninstall</code></pre></li>
 <li><p>中间可能会有报错，缺乏各种依赖库<br>若弹出Unable to find a suitable destination to install 32-bit compatibility libraries on Ubuntu 18.04 Bionic Beaver Linux的bug</p>
-<p>  sudo dpkg –add-architecture i386<br>  sudo apt update<br>  sudo apt install libc6:i386</p>
-</li>
+<pre><code>sudo dpkg --add-architecture i386
+sudo apt update
+sudo apt install libc6:i386</code></pre></li>
 <li><p>安装完后，执行指令可以查看gpu的状态，则证明</p>
-<p>  nvidia-smi</p>
-</li>
+<pre><code>nvidia-smi</code></pre></li>
 </ul>
 <h4 id="安装cuda"><a href="#安装cuda" class="headerlink" title="安装cuda"></a>安装cuda</h4><ul>
 <li><p>先把前置需要的库安装上</p>
-<p>  sudo apt-get install freeglut3-dev libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev</p>
-</li>
+<pre><code>sudo apt-get install freeglut3-dev libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev</code></pre></li>
 <li><p>然后从官网上下载，并用md5检查下下载的安装包是否受损</p>
-<p>  md5sum cuda_10.0.130_410.48_linux.run</p>
-</li>
+<pre><code>md5sum cuda_10.0.130_410.48_linux.run</code></pre></li>
 <li><p>开始安装cuda，安装时可以暂时不安装OpenGL</p>
-<p>  sudo sh cuda_10.0.130_410.48_linux.run –no-opengl-files</p>
-</li>
+<pre><code>sudo sh cuda_10.0.130_410.48_linux.run –no-opengl-files</code></pre></li>
 <li><p>添加环境变量</p>
-<p>  vim ~/.bashrc</p>
-</li>
+<pre><code>vim ~/.bashrc</code></pre></li>
 </ul>
-<p>在其中写入</p>
+<p>在其中写入<br>‘’’</p>
 <pre><code>export CUDA_HOME=/usr/local/cuda
 export PATH=$PATH:$CUDA_HOME/bin
-export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}</code></pre><p>保存后，并执行</p>
+export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}</code></pre><p>‘’’<br>保存后，并执行</p>
 <pre><code>source ~/.bashrc</code></pre><ul>
-<li><p>查看cuda的版本，判断是否安装成功</p>
-<p>  nvcc -V</p>
-</li>
+<li>查看cuda的版本，判断是否安装成功</li>
 </ul>
+<p>‘’’</p>
+<pre><code>nvcc -V</code></pre><p>‘’’</p>
 <h3 id="编译安装caffe"><a href="#编译安装caffe" class="headerlink" title="编译安装caffe"></a>编译安装caffe</h3><ul>
-<li><p>先下载源码</p>
-<p>  git clone https//github.com/bvlc/caffe.git<br>  cd caffe/<br>  mv Makefile.config.example Makefile.confile</p>
-</li>
-<li><p>看懂并修改配置文件</p>
-<h2 id="Refer-to-http-caffe-berkeleyvision-org-installation-html"><a href="#Refer-to-http-caffe-berkeleyvision-org-installation-html" class="headerlink" title="Refer to http://caffe.berkeleyvision.org/installation.html"></a>Refer to <a href="http://caffe.berkeleyvision.org/installation.html" target="_blank" rel="noopener">http://caffe.berkeleyvision.org/installation.html</a></h2><h1 id="Contributions-simplifying-and-improving-our-build-system-are-welcome"><a href="#Contributions-simplifying-and-improving-our-build-system-are-welcome" class="headerlink" title="Contributions simplifying and improving our build system are welcome!"></a>Contributions simplifying and improving our build system are welcome!</h1><h1 id="cuDNN-acceleration-switch-uncomment-to-build-with-cuDNN"><a href="#cuDNN-acceleration-switch-uncomment-to-build-with-cuDNN" class="headerlink" title="cuDNN acceleration switch (uncomment to build with cuDNN)."></a>cuDNN acceleration switch (uncomment to build with cuDNN).</h1><p>  USE_CUDNN := 1 #使用cudnn，将注释去掉</p>
-<h1 id="CPU-only-switch-uncomment-to-build-without-GPU-support"><a href="#CPU-only-switch-uncomment-to-build-without-GPU-support" class="headerlink" title="CPU-only switch (uncomment to build without GPU support)."></a>CPU-only switch (uncomment to build without GPU support).</h1><h1 id="CPU-ONLY-1-使用GPU，所保留注释"><a href="#CPU-ONLY-1-使用GPU，所保留注释" class="headerlink" title="CPU_ONLY := 1  #使用GPU，所保留注释"></a>CPU_ONLY := 1  #使用GPU，所保留注释</h1><h1 id="uncomment-to-disable-IO-dependencies-and-corresponding-data-layers"><a href="#uncomment-to-disable-IO-dependencies-and-corresponding-data-layers" class="headerlink" title="uncomment to disable IO dependencies and corresponding data layers"></a>uncomment to disable IO dependencies and corresponding data layers</h1><p> USE_OPENCV := 1     # 使用opencv</p>
-<h1 id="USE-LEVELDB-0"><a href="#USE-LEVELDB-0" class="headerlink" title="USE_LEVELDB := 0"></a>USE_LEVELDB := 0</h1><p> USE_LMDB := 1       # 使用LMDB </p>
-<h1 id="This-code-is-taken-from-https-github-com-sh1r0-caffe-android-lib"><a href="#This-code-is-taken-from-https-github-com-sh1r0-caffe-android-lib" class="headerlink" title="This code is taken from https://github.com/sh1r0/caffe-android-lib"></a>This code is taken from <a href="https://github.com/sh1r0/caffe-android-lib" target="_blank" rel="noopener">https://github.com/sh1r0/caffe-android-lib</a></h1><p> USE_HDF5 := 1       # 使用HDF5</p>
-<h1 id="uncomment-to-allow-MDB-NOLOCK-when-reading-LMDB-files-only-if-necessary"><a href="#uncomment-to-allow-MDB-NOLOCK-when-reading-LMDB-files-only-if-necessary" class="headerlink" title="uncomment to allow MDB_NOLOCK when reading LMDB files (only if necessary)"></a>uncomment to allow MDB_NOLOCK when reading LMDB files (only if necessary)</h1><h1 id="You-should-not-set-this-flag-if-you-will-be-reading-LMDBs-with-any"><a href="#You-should-not-set-this-flag-if-you-will-be-reading-LMDBs-with-any" class="headerlink" title="You should not set this flag if you will be reading LMDBs with any"></a>You should not set this flag if you will be reading LMDBs with any</h1><h1 id="possibility-of-simultaneous-read-and-write"><a href="#possibility-of-simultaneous-read-and-write" class="headerlink" title="possibility of simultaneous read and write"></a>possibility of simultaneous read and write</h1><h1 id="ALLOW-LMDB-NOLOCK-1"><a href="#ALLOW-LMDB-NOLOCK-1" class="headerlink" title="ALLOW_LMDB_NOLOCK := 1"></a>ALLOW_LMDB_NOLOCK := 1</h1><h1 id="Uncomment-if-you’re-using-OpenCV-3"><a href="#Uncomment-if-you’re-using-OpenCV-3" class="headerlink" title="Uncomment if you’re using OpenCV 3"></a>Uncomment if you’re using OpenCV 3</h1><p> OPENCV_VERSION := 3  # 使用opencv3 以上的版本</p>
-<h1 id="To-customize-your-choice-of-compiler-uncomment-and-set-the-following"><a href="#To-customize-your-choice-of-compiler-uncomment-and-set-the-following" class="headerlink" title="To customize your choice of compiler, uncomment and set the following."></a>To customize your choice of compiler, uncomment and set the following.</h1><h1 id="N-B-the-default-for-Linux-is-g-and-the-default-for-OSX-is-clang"><a href="#N-B-the-default-for-Linux-is-g-and-the-default-for-OSX-is-clang" class="headerlink" title="N.B. the default for Linux is g++ and the default for OSX is clang++"></a>N.B. the default for Linux is g++ and the default for OSX is clang++</h1><h1 id="CUSTOM-CXX-g"><a href="#CUSTOM-CXX-g" class="headerlink" title="CUSTOM_CXX := g++"></a>CUSTOM_CXX := g++</h1><h1 id="CUDA-directory-contains-bin-and-lib-directories-that-we-need"><a href="#CUDA-directory-contains-bin-and-lib-directories-that-we-need" class="headerlink" title="CUDA directory contains bin/ and lib/ directories that we need."></a>CUDA directory contains bin/ and lib/ directories that we need.</h1><p> CUDA_DIR := /usr/local/cuda     #cuda的安装路径</p>
-<h1 id="On-Ubuntu-14-04-if-cuda-tools-are-installed-via"><a href="#On-Ubuntu-14-04-if-cuda-tools-are-installed-via" class="headerlink" title="On Ubuntu 14.04, if cuda tools are installed via"></a>On Ubuntu 14.04, if cuda tools are installed via</h1><h1 id="“sudo-apt-get-install-nvidia-cuda-toolkit”-then-use-this-instead"><a href="#“sudo-apt-get-install-nvidia-cuda-toolkit”-then-use-this-instead" class="headerlink" title="“sudo apt-get install nvidia-cuda-toolkit” then use this instead:"></a>“sudo apt-get install nvidia-cuda-toolkit” then use this instead:</h1><h1 id="CUDA-DIR-usr-如果是使用-apt-get-安装的，用此路径"><a href="#CUDA-DIR-usr-如果是使用-apt-get-安装的，用此路径" class="headerlink" title="CUDA_DIR := /usr              # 如果是使用 apt-get 安装的，用此路径"></a>CUDA_DIR := /usr              # 如果是使用 apt-get 安装的，用此路径</h1><h1 id="CUDA-architecture-setting-going-with-all-of-them"><a href="#CUDA-architecture-setting-going-with-all-of-them" class="headerlink" title="CUDA architecture setting: going with all of them."></a>CUDA architecture setting: going with all of them.</h1><p> #在不同的cuda版本和gpu上需要使用不同的匹配选项<br> #具体可以查看官网信息 <a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-gpus</a></p>
-<h1 id="https-docs-nvidia-com-cuda-cuda-c-programming-guide-index-html-compute-capabilities"><a href="#https-docs-nvidia-com-cuda-cuda-c-programming-guide-index-html-compute-capabilities" class="headerlink" title="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities"></a><a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities" target="_blank" rel="noopener">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities</a></h1><p> #将不兼容的选项注释掉</p>
-<h1 id="For-CUDA-lt-6-0-comment-the-50-through-61-lines-for-compatibility"><a href="#For-CUDA-lt-6-0-comment-the-50-through-61-lines-for-compatibility" class="headerlink" title="For CUDA &lt; 6.0, comment the *_50 through *_61 lines for compatibility."></a>For CUDA &lt; 6.0, comment the *_50 through *_61 lines for compatibility.</h1><h1 id="For-CUDA-lt-8-0-comment-the-60-and-61-lines-for-compatibility"><a href="#For-CUDA-lt-8-0-comment-the-60-and-61-lines-for-compatibility" class="headerlink" title="For CUDA &lt; 8.0, comment the *_60 and *_61 lines for compatibility."></a>For CUDA &lt; 8.0, comment the *_60 and *_61 lines for compatibility.</h1><h1 id="For-CUDA-gt-9-0-comment-the-20-and-21-lines-for-compatibility"><a href="#For-CUDA-gt-9-0-comment-the-20-and-21-lines-for-compatibility" class="headerlink" title="For CUDA &gt;= 9.0, comment the *_20 and *_21 lines for compatibility."></a>For CUDA &gt;= 9.0, comment the *_20 and *_21 lines for compatibility.</h1><p> CUDA_ARCH := -gencode arch=compute_20,code=sm_20 \</p>
-<pre><code>-gencode arch=compute_20,code=sm_21 \
--gencode arch=compute_30,code=sm_30 \
--gencode arch=compute_35,code=sm_35 \
--gencode arch=compute_50,code=sm_50 \
--gencode arch=compute_52,code=sm_52 \
--gencode arch=compute_60,code=sm_60 \
--gencode arch=compute_61,code=sm_61 \
--gencode arch=compute_61,code=compute_61</code></pre><h1 id="BLAS-choice"><a href="#BLAS-choice" class="headerlink" title="BLAS choice:"></a>BLAS choice:</h1><h1 id="atlas-for-ATLAS-default"><a href="#atlas-for-ATLAS-default" class="headerlink" title="atlas for ATLAS (default)"></a>atlas for ATLAS (default)</h1><h1 id="mkl-for-MKL"><a href="#mkl-for-MKL" class="headerlink" title="mkl for MKL"></a>mkl for MKL</h1><h1 id="open-for-OpenBlas"><a href="#open-for-OpenBlas" class="headerlink" title="open for OpenBlas"></a>open for OpenBlas</h1><p> BLAS := atlas  #默认为atlas，也可以选用MKL、ATLAS、OpenBLAS</p>
-<h1 id="Custom-MKL-ATLAS-OpenBLAS-include-and-lib-directories"><a href="#Custom-MKL-ATLAS-OpenBLAS-include-and-lib-directories" class="headerlink" title="Custom (MKL/ATLAS/OpenBLAS) include and lib directories."></a>Custom (MKL/ATLAS/OpenBLAS) include and lib directories.</h1><h1 id="Leave-commented-to-accept-the-defaults-for-your-choice-of-BLAS"><a href="#Leave-commented-to-accept-the-defaults-for-your-choice-of-BLAS" class="headerlink" title="Leave commented to accept the defaults for your choice of BLAS"></a>Leave commented to accept the defaults for your choice of BLAS</h1><h1 id="which-should-work-此处需要手动配置，blas的库目录和引用目录"><a href="#which-should-work-此处需要手动配置，blas的库目录和引用目录" class="headerlink" title="(which should work)!  #此处需要手动配置，blas的库目录和引用目录"></a>(which should work)!  #此处需要手动配置，blas的库目录和引用目录</h1><h1 id="BLAS-INCLUDE-path-to-your-blas"><a href="#BLAS-INCLUDE-path-to-your-blas" class="headerlink" title="BLAS_INCLUDE := /path/to/your/blas"></a>BLAS_INCLUDE := /path/to/your/blas</h1><h1 id="BLAS-LIB-path-to-your-blas"><a href="#BLAS-LIB-path-to-your-blas" class="headerlink" title="BLAS_LIB := /path/to/your/blas"></a>BLAS_LIB := /path/to/your/blas</h1><h1 id="Homebrew-puts-openblas-in-a-directory-that-is-not-on-the-standard-search-path"><a href="#Homebrew-puts-openblas-in-a-directory-that-is-not-on-the-standard-search-path" class="headerlink" title="Homebrew puts openblas in a directory that is not on the standard search path"></a>Homebrew puts openblas in a directory that is not on the standard search path</h1><h1 id="BLAS-INCLUDE-shell-brew-–prefix-openblas-include"><a href="#BLAS-INCLUDE-shell-brew-–prefix-openblas-include" class="headerlink" title="BLAS_INCLUDE := $(shell brew –prefix openblas)/include"></a>BLAS_INCLUDE := $(shell brew –prefix openblas)/include</h1><h1 id="BLAS-LIB-shell-brew-–prefix-openblas-lib"><a href="#BLAS-LIB-shell-brew-–prefix-openblas-lib" class="headerlink" title="BLAS_LIB := $(shell brew –prefix openblas)/lib"></a>BLAS_LIB := $(shell brew –prefix openblas)/lib</h1><h1 id="如果需要安装matlab的接口则需要在此处配置，Matlab相关目录"><a href="#如果需要安装matlab的接口则需要在此处配置，Matlab相关目录" class="headerlink" title="如果需要安装matlab的接口则需要在此处配置，Matlab相关目录"></a>如果需要安装matlab的接口则需要在此处配置，Matlab相关目录</h1><h1 id="This-is-required-only-if-you-will-compile-the-matlab-interface"><a href="#This-is-required-only-if-you-will-compile-the-matlab-interface" class="headerlink" title="This is required only if you will compile the matlab interface."></a>This is required only if you will compile the matlab interface.</h1><h1 id="MATLAB-directory-should-contain-the-mex-binary-in-bin"><a href="#MATLAB-directory-should-contain-the-mex-binary-in-bin" class="headerlink" title="MATLAB directory should contain the mex binary in /bin."></a>MATLAB directory should contain the mex binary in /bin.</h1><h1 id="MATLAB-DIR-usr-local"><a href="#MATLAB-DIR-usr-local" class="headerlink" title="MATLAB_DIR := /usr/local"></a>MATLAB_DIR := /usr/local</h1><h1 id="MATLAB-DIR-Applications-MATLAB-R2012b-app"><a href="#MATLAB-DIR-Applications-MATLAB-R2012b-app" class="headerlink" title="MATLAB_DIR := /Applications/MATLAB_R2012b.app"></a>MATLAB_DIR := /Applications/MATLAB_R2012b.app</h1><h1 id="python的相关接口，若不使用python2可以将其全部注释掉"><a href="#python的相关接口，若不使用python2可以将其全部注释掉" class="headerlink" title="python的相关接口，若不使用python2可以将其全部注释掉"></a>python的相关接口，若不使用python2可以将其全部注释掉</h1><h1 id="NOTE-this-is-required-only-if-you-will-compile-the-python-interface"><a href="#NOTE-this-is-required-only-if-you-will-compile-the-python-interface" class="headerlink" title="NOTE: this is required only if you will compile the python interface."></a>NOTE: this is required only if you will compile the python interface.</h1><h1 id="We-need-to-be-able-to-find-Python-h-and-numpy-arrayobject-h"><a href="#We-need-to-be-able-to-find-Python-h-and-numpy-arrayobject-h" class="headerlink" title="We need to be able to find Python.h and numpy/arrayobject.h."></a>We need to be able to find Python.h and numpy/arrayobject.h.</h1><p> PYTHON_INCLUDE := /usr/include/python2.7 \</p>
-<pre><code>/usr/lib/python2.7/dist-packages/numpy/core/include</code></pre><h1 id="Anaconda-Python-distribution-is-quite-popular-Include-path"><a href="#Anaconda-Python-distribution-is-quite-popular-Include-path" class="headerlink" title="Anaconda Python distribution is quite popular. Include path:"></a>Anaconda Python distribution is quite popular. Include path:</h1><h1 id="Verify-anaconda-location-sometimes-it’s-in-root"><a href="#Verify-anaconda-location-sometimes-it’s-in-root" class="headerlink" title="Verify anaconda location, sometimes it’s in root."></a>Verify anaconda location, sometimes it’s in root.</h1><h1 id="ANACONDA-HOME-HOME-anaconda"><a href="#ANACONDA-HOME-HOME-anaconda" class="headerlink" title="ANACONDA_HOME := $(HOME)/anaconda"></a>ANACONDA_HOME := $(HOME)/anaconda</h1><h1 id="PYTHON-INCLUDE-ANACONDA-HOME-include"><a href="#PYTHON-INCLUDE-ANACONDA-HOME-include" class="headerlink" title="PYTHON_INCLUDE := $(ANACONDA_HOME)/include \"></a>PYTHON_INCLUDE := $(ANACONDA_HOME)/include \</h1><pre><code># $(ANACONDA_HOME)/include/python2.7 \
-# $(ANACONDA_HOME)/lib/python2.7/site-packages/numpy/core/include</code></pre><h1 id="使用python3，在下面几行配置"><a href="#使用python3，在下面几行配置" class="headerlink" title="使用python3，在下面几行配置"></a>使用python3，在下面几行配置</h1><h1 id="Uncomment-to-use-Python-3-default-is-Python-2"><a href="#Uncomment-to-use-Python-3-default-is-Python-2" class="headerlink" title="Uncomment to use Python 3 (default is Python 2)"></a>Uncomment to use Python 3 (default is Python 2)</h1><h1 id="PYTHON-LIBRARIES-boost-python3-python3-5m"><a href="#PYTHON-LIBRARIES-boost-python3-python3-5m" class="headerlink" title="PYTHON_LIBRARIES := boost_python3 python3.5m"></a>PYTHON_LIBRARIES := boost_python3 python3.5m</h1><h1 id="PYTHON-INCLUDE-usr-include-python3-5m"><a href="#PYTHON-INCLUDE-usr-include-python3-5m" class="headerlink" title="PYTHON_INCLUDE := /usr/include/python3.5m \"></a>PYTHON_INCLUDE := /usr/include/python3.5m \</h1><h1 id="usr-lib-python3-5-dist-packages-numpy-core-include"><a href="#usr-lib-python3-5-dist-packages-numpy-core-include" class="headerlink" title="/usr/lib/python3.5/dist-packages/numpy/core/include"></a>/usr/lib/python3.5/dist-packages/numpy/core/include</h1><h1 id="We-need-to-be-able-to-find-libpythonX-X-so-or-dylib"><a href="#We-need-to-be-able-to-find-libpythonX-X-so-or-dylib" class="headerlink" title="We need to be able to find libpythonX.X.so or .dylib."></a>We need to be able to find libpythonX.X.so or .dylib.</h1><p> PYTHON_LIB := /usr/lib</p>
-<h1 id="PYTHON-LIB-ANACONDA-HOME-lib"><a href="#PYTHON-LIB-ANACONDA-HOME-lib" class="headerlink" title="PYTHON_LIB := $(ANACONDA_HOME)/lib"></a>PYTHON_LIB := $(ANACONDA_HOME)/lib</h1><h1 id="Homebrew-installs-numpy-in-a-non-standard-path-keg-only"><a href="#Homebrew-installs-numpy-in-a-non-standard-path-keg-only" class="headerlink" title="Homebrew installs numpy in a non standard path (keg only)"></a>Homebrew installs numpy in a non standard path (keg only)</h1><h1 id="PYTHON-INCLUDE-dir-shell-python-c-‘import-numpy-core-print-numpy-core-file-’-include"><a href="#PYTHON-INCLUDE-dir-shell-python-c-‘import-numpy-core-print-numpy-core-file-’-include" class="headerlink" title="PYTHON_INCLUDE += $(dir $(shell python -c ‘import numpy.core; print(numpy.core.file)’))/include"></a>PYTHON_INCLUDE += $(dir $(shell python -c ‘import numpy.core; print(numpy.core.<strong>file</strong>)’))/include</h1><h1 id="PYTHON-LIB-shell-brew-–prefix-numpy-lib"><a href="#PYTHON-LIB-shell-brew-–prefix-numpy-lib" class="headerlink" title="PYTHON_LIB += $(shell brew –prefix numpy)/lib"></a>PYTHON_LIB += $(shell brew –prefix numpy)/lib</h1><h1 id="此处配置建议选上，可以通过python接口来生产caffe模型配置"><a href="#此处配置建议选上，可以通过python接口来生产caffe模型配置" class="headerlink" title="此处配置建议选上，可以通过python接口来生产caffe模型配置"></a>此处配置建议选上，可以通过python接口来生产caffe模型配置</h1><h1 id="Uncomment-to-support-layers-written-in-Python-will-link-against-Python-libs"><a href="#Uncomment-to-support-layers-written-in-Python-will-link-against-Python-libs" class="headerlink" title="Uncomment to support layers written in Python (will link against Python libs)"></a>Uncomment to support layers written in Python (will link against Python libs)</h1><h1 id="WITH-PYTHON-LAYER-1"><a href="#WITH-PYTHON-LAYER-1" class="headerlink" title="WITH_PYTHON_LAYER := 1"></a>WITH_PYTHON_LAYER := 1</h1><h1 id="Whatever-else-you-find-you-need-goes-here"><a href="#Whatever-else-you-find-you-need-goes-here" class="headerlink" title="Whatever else you find you need goes here."></a>Whatever else you find you need goes here.</h1><h1 id="这里需要添加HDF5的相关路径"><a href="#这里需要添加HDF5的相关路径" class="headerlink" title="这里需要添加HDF5的相关路径"></a>这里需要添加HDF5的相关路径</h1><p> INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/<br> LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu/hdf5/serial</p>
-<h1 id="INCLUDE-DIRS-PYTHON-INCLUDE-usr-local-include"><a href="#INCLUDE-DIRS-PYTHON-INCLUDE-usr-local-include" class="headerlink" title="INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include"></a>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include</h1><h1 id="LIBRARY-DIRS-PYTHON-LIB-usr-local-lib-usr-lib"><a href="#LIBRARY-DIRS-PYTHON-LIB-usr-local-lib-usr-lib" class="headerlink" title="LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib"></a>LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib</h1><h1 id="If-Homebrew-is-installed-at-a-non-standard-location-for-example-your-home-directory-and-you-use-it-for-general-dependencies"><a href="#If-Homebrew-is-installed-at-a-non-standard-location-for-example-your-home-directory-and-you-use-it-for-general-dependencies" class="headerlink" title="If Homebrew is installed at a non standard location (for example your home directory) and you use it for general dependencies"></a>If Homebrew is installed at a non standard location (for example your home directory) and you use it for general dependencies</h1><h1 id="INCLUDE-DIRS-shell-brew-–prefix-include"><a href="#INCLUDE-DIRS-shell-brew-–prefix-include" class="headerlink" title="INCLUDE_DIRS += $(shell brew –prefix)/include"></a>INCLUDE_DIRS += $(shell brew –prefix)/include</h1><h1 id="LIBRARY-DIRS-shell-brew-–prefix-lib"><a href="#LIBRARY-DIRS-shell-brew-–prefix-lib" class="headerlink" title="LIBRARY_DIRS += $(shell brew –prefix)/lib"></a>LIBRARY_DIRS += $(shell brew –prefix)/lib</h1><h1 id="NCCL-acceleration-switch-uncomment-to-build-with-NCCL"><a href="#NCCL-acceleration-switch-uncomment-to-build-with-NCCL" class="headerlink" title="NCCL acceleration switch (uncomment to build with NCCL)"></a>NCCL acceleration switch (uncomment to build with NCCL)</h1><h1 id="https-github-com-NVIDIA-nccl-last-tested-version-v1-2-3-1-cuda8-0"><a href="#https-github-com-NVIDIA-nccl-last-tested-version-v1-2-3-1-cuda8-0" class="headerlink" title="https://github.com/NVIDIA/nccl (last tested version: v1.2.3-1+cuda8.0)"></a><a href="https://github.com/NVIDIA/nccl" target="_blank" rel="noopener">https://github.com/NVIDIA/nccl</a> (last tested version: v1.2.3-1+cuda8.0)</h1><h1 id="USE-NCCL-1"><a href="#USE-NCCL-1" class="headerlink" title="USE_NCCL := 1"></a>USE_NCCL := 1</h1><h1 id="Uncomment-to-use-pkg-config-to-specify-OpenCV-library-paths"><a href="#Uncomment-to-use-pkg-config-to-specify-OpenCV-library-paths" class="headerlink" title="Uncomment to use pkg-config to specify OpenCV library paths."></a>Uncomment to use <code>pkg-config</code> to specify OpenCV library paths.</h1><h1 id="Usually-not-necessary-–-OpenCV-libraries-are-normally-installed-in-one-of-the-above-LIBRARY-DIRS"><a href="#Usually-not-necessary-–-OpenCV-libraries-are-normally-installed-in-one-of-the-above-LIBRARY-DIRS" class="headerlink" title="(Usually not necessary – OpenCV libraries are normally installed in one of the above $LIBRARY_DIRS.)"></a>(Usually not necessary – OpenCV libraries are normally installed in one of the above $LIBRARY_DIRS.)</h1><h1 id="USE-PKG-CONFIG-1"><a href="#USE-PKG-CONFIG-1" class="headerlink" title="USE_PKG_CONFIG := 1"></a>USE_PKG_CONFIG := 1</h1><h1 id="N-B-both-build-and-distribute-dirs-are-cleared-on-make-clean"><a href="#N-B-both-build-and-distribute-dirs-are-cleared-on-make-clean" class="headerlink" title="N.B. both build and distribute dirs are cleared on make clean"></a>N.B. both build and distribute dirs are cleared on <code>make clean</code></h1><p> BUILD_DIR := build<br> DISTRIBUTE_DIR := distribute</p>
-<h1 id="Uncomment-for-debugging-Does-not-work-on-OSX-due-to-https-github-com-BVLC-caffe-issues-171"><a href="#Uncomment-for-debugging-Does-not-work-on-OSX-due-to-https-github-com-BVLC-caffe-issues-171" class="headerlink" title="Uncomment for debugging. Does not work on OSX due to https://github.com/BVLC/caffe/issues/171"></a>Uncomment for debugging. Does not work on OSX due to <a href="https://github.com/BVLC/caffe/issues/171" target="_blank" rel="noopener">https://github.com/BVLC/caffe/issues/171</a></h1><h1 id="DEBUG-1"><a href="#DEBUG-1" class="headerlink" title="DEBUG := 1"></a>DEBUG := 1</h1><h1 id="The-ID-of-the-GPU-that-‘make-runtest’-will-use-to-run-unit-tests"><a href="#The-ID-of-the-GPU-that-‘make-runtest’-will-use-to-run-unit-tests" class="headerlink" title="The ID of the GPU that ‘make runtest’ will use to run unit tests."></a>The ID of the GPU that ‘make runtest’ will use to run unit tests.</h1><p> TEST_GPUID := 0</p>
-<h1 id="enable-pretty-build-comment-to-see-full-commands"><a href="#enable-pretty-build-comment-to-see-full-commands" class="headerlink" title="enable pretty build (comment to see full commands)"></a>enable pretty build (comment to see full commands)</h1><p> Q ?= @</p>
-<p> CXXFLAGS+=-std=c++11<br> CUSTOM_CXX := g++ -std=c++11</p>
-</li>
+<li>先下载源码</li>
 </ul>
+<p>‘’’    </p>
+<pre><code>git clone https//github.com/bvlc/caffe.git
+cd caffe/
+mv Makefile.config.example Makefile.confile</code></pre><p>‘’’</p>
+<pre><code>* 看懂并修改配置文件</code></pre><p>‘’’</p>
+<pre><code># Refer to http://caffe.berkeleyvision.org/installation.html
+# Contributions simplifying and improving our build system are welcome!
+
+# cuDNN acceleration switch (uncomment to build with cuDNN).
+USE_CUDNN := 1 #使用cudnn，将注释去掉
+
+# CPU-only switch (uncomment to build without GPU support).
+# CPU_ONLY := 1  #使用GPU，所保留注释
+
+# uncomment to disable IO dependencies and corresponding data layers
+USE_OPENCV := 1     # 使用opencv
+# USE_LEVELDB := 0
+USE_LMDB := 1       # 使用LMDB 
+# This code is taken from https://github.com/sh1r0/caffe-android-lib
+USE_HDF5 := 1       # 使用HDF5
+
+# uncomment to allow MDB_NOLOCK when reading LMDB files (only if necessary)
+#    You should not set this flag if you will be reading LMDBs with any
+#    possibility of simultaneous read and write
+# ALLOW_LMDB_NOLOCK := 1
+
+# Uncomment if you&apos;re using OpenCV 3
+OPENCV_VERSION := 3  # 使用opencv3 以上的版本
+
+# To customize your choice of compiler, uncomment and set the following.
+# N.B. the default for Linux is g++ and the default for OSX is clang++
+# CUSTOM_CXX := g++
+
+# CUDA directory contains bin/ and lib/ directories that we need.
+CUDA_DIR := /usr/local/cuda     #cuda的安装路径
+# On Ubuntu 14.04, if cuda tools are installed via
+# &quot;sudo apt-get install nvidia-cuda-toolkit&quot; then use this instead:
+# CUDA_DIR := /usr              # 如果是使用 apt-get 安装的，用此路径
+
+# CUDA architecture setting: going with all of them.
+#在不同的cuda版本和gpu上需要使用不同的匹配选项 
+#具体可以查看官网信息 https://developer.nvidia.com/cuda-gpus
+# https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capabilities
+
+# 将不兼容的选项注释掉
+# For CUDA &lt; 6.0, comment the *_50 through *_61 lines for compatibility. 
+# For CUDA &lt; 8.0, comment the *_60 and *_61 lines for compatibility.
+# For CUDA &gt;= 9.0, comment the *_20 and *_21 lines for compatibility.
+CUDA_ARCH := -gencode arch=compute_20,code=sm_20 \
+        -gencode arch=compute_20,code=sm_21 \
+        -gencode arch=compute_30,code=sm_30 \
+        -gencode arch=compute_35,code=sm_35 \
+        -gencode arch=compute_50,code=sm_50 \
+        -gencode arch=compute_52,code=sm_52 \
+        -gencode arch=compute_60,code=sm_60 \
+        -gencode arch=compute_61,code=sm_61 \
+        -gencode arch=compute_61,code=compute_61
+
+# BLAS choice:
+# atlas for ATLAS (default)
+# mkl for MKL
+# open for OpenBlas
+BLAS := atlas  #默认为atlas，也可以选用MKL、ATLAS、OpenBLAS
+# Custom (MKL/ATLAS/OpenBLAS) include and lib directories.
+# Leave commented to accept the defaults for your choice of BLAS
+# (which should work)!  #此处需要手动配置，blas的库目录和引用目录    
+# BLAS_INCLUDE := /path/to/your/blas
+# BLAS_LIB := /path/to/your/blas
+
+# Homebrew puts openblas in a directory that is not on the standard search path
+# BLAS_INCLUDE := $(shell brew --prefix openblas)/include
+# BLAS_LIB := $(shell brew --prefix openblas)/lib
+
+# 如果需要安装matlab的接口则需要在此处配置，Matlab相关目录
+# This is required only if you will compile the matlab interface. 
+# MATLAB directory should contain the mex binary in /bin.
+# MATLAB_DIR := /usr/local
+# MATLAB_DIR := /Applications/MATLAB_R2012b.app
+
+# python的相关接口，若不使用python2可以将其全部注释掉
+# NOTE: this is required only if you will compile the python interface.
+# We need to be able to find Python.h and numpy/arrayobject.h.
+PYTHON_INCLUDE := /usr/include/python2.7 \
+        /usr/lib/python2.7/dist-packages/numpy/core/include
+# Anaconda Python distribution is quite popular. Include path:
+# Verify anaconda location, sometimes it&apos;s in root.
+# ANACONDA_HOME := $(HOME)/anaconda
+# PYTHON_INCLUDE := $(ANACONDA_HOME)/include \
+        # $(ANACONDA_HOME)/include/python2.7 \
+        # $(ANACONDA_HOME)/lib/python2.7/site-packages/numpy/core/include
+# 使用python3，在下面几行配置
+# Uncomment to use Python 3 (default is Python 2)
+# PYTHON_LIBRARIES := boost_python3 python3.5m
+# PYTHON_INCLUDE := /usr/include/python3.5m \
+#                 /usr/lib/python3.5/dist-packages/numpy/core/include
+
+# We need to be able to find libpythonX.X.so or .dylib.
+PYTHON_LIB := /usr/lib
+# PYTHON_LIB := $(ANACONDA_HOME)/lib
+
+# Homebrew installs numpy in a non standard path (keg only)
+# PYTHON_INCLUDE += $(dir $(shell python -c &apos;import numpy.core; print(numpy.core.__file__)&apos;))/include
+# PYTHON_LIB += $(shell brew --prefix numpy)/lib
+
+# 此处配置建议选上，可以通过python接口来生产caffe模型配置
+# Uncomment to support layers written in Python (will link against Python libs)
+# WITH_PYTHON_LAYER := 1
+
+# Whatever else you find you need goes here.
+# 这里需要添加HDF5的相关路径
+
+INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/
+LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu/hdf5/serial
+
+# INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
+# LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib
+
+# If Homebrew is installed at a non standard location (for example your home directory) and you use it for general dependencies
+# INCLUDE_DIRS += $(shell brew --prefix)/include
+# LIBRARY_DIRS += $(shell brew --prefix)/lib
+
+# NCCL acceleration switch (uncomment to build with NCCL)
+# https://github.com/NVIDIA/nccl (last tested version: v1.2.3-1+cuda8.0)
+# USE_NCCL := 1
+
+# Uncomment to use `pkg-config` to specify OpenCV library paths.
+# (Usually not necessary -- OpenCV libraries are normally installed in one of the above $LIBRARY_DIRS.)
+# USE_PKG_CONFIG := 1
+
+# N.B. both build and distribute dirs are cleared on `make clean`
+BUILD_DIR := build
+DISTRIBUTE_DIR := distribute
+
+# Uncomment for debugging. Does not work on OSX due to https://github.com/BVLC/caffe/issues/171
+# DEBUG := 1
+
+# The ID of the GPU that &apos;make runtest&apos; will use to run unit tests.
+TEST_GPUID := 0
+
+# enable pretty build (comment to see full commands)
+Q ?= @
+
+CXXFLAGS+=-std=c++11
+CUSTOM_CXX := g++ -std=c++11</code></pre><p>‘’’</p>
 <ul>
 <li>修改Makefile中的链接库</li>
 </ul>
-<p>将：<br>    NVCCFLAGS +=-ccbin=$(CXX) -Xcompiler-fPIC $(COMMON_FLAGS)<br>替换为：<br>    NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)</p>
-<p>将：<br>    LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5<br>改为：<br>    LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial</p>
-<ul>
-<li><p>开始编译<br>  makedir build<br>  cd build<br>  cmake ..<br>  make -j8<br>  make runtest -j8<br>  make pycaffe -j8</p>
-</li>
-<li><p>安装一下python的依赖</p>
-<p>  cd python<br>  pip install –yes –file requirements.txt</p>
-</li>
+<p>将：</p>
+<pre><code>NVCCFLAGS +=-ccbin=$(CXX) -Xcompiler-fPIC $(COMMON_FLAGS)</code></pre><p>替换为：</p>
+<pre><code>NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)</code></pre><p>将：</p>
+<pre><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5</code></pre><p>改为：</p>
+<pre><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial</code></pre><ul>
+<li>开始编译</li>
 </ul>
+<p>‘’’</p>
+<pre><code>makedir build
+cd build
+cmake ..
+make -j8
+make runtest -j8
+make pycaffe -j8</code></pre><p>‘’’</p>
+<ul>
+<li>安装一下python的依赖</li>
+</ul>
+<p>‘’’</p>
+<pre><code>cd python
+pip install --yes --file requirements.txt</code></pre><p>‘’’</p>
 <h3 id="采坑记录"><a href="#采坑记录" class="headerlink" title="采坑记录"></a>采坑记录</h3>
             <hr>
           </div>
