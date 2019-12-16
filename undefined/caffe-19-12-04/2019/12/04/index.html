@@ -1,85 +1,349 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/fan-128x128.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/fan-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/fan-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/fan.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="caffe," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="caffe环境配置caffe的依赖库简介ProtoBufferGoogle Protocol Buffer (简称ProtoBuf) 是一种轻便高效的结构化数据存储格式，可以用于结构化数据的串行化，或者说序列化。它很合适做数据存储或RPC数据的交换格式。可以用于通信协议、数据存储等领域的语言无关、平台无关、可扩展的序列结构数据格式。要使用Protobuf库，首先需要自己编写一个.proto文件，定">
+<meta name="keywords" content="caffe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="caffe(初识2)">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;undefined&#x2F;caffe-19-12-04&#x2F;2019&#x2F;12&#x2F;04&#x2F;index.html">
+<meta property="og:site_name" content="学习日志">
+<meta property="og:description" content="caffe环境配置caffe的依赖库简介ProtoBufferGoogle Protocol Buffer (简称ProtoBuf) 是一种轻便高效的结构化数据存储格式，可以用于结构化数据的串行化，或者说序列化。它很合适做数据存储或RPC数据的交换格式。可以用于通信协议、数据存储等领域的语言无关、平台无关、可扩展的序列结构数据格式。要使用Protobuf库，首先需要自己编写一个.proto文件，定">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-15T14:01:19.843Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/undefined/caffe-19-12-04/2019/12/04/"/>
+
+
+
+
+
+  <title>caffe(初识2) | 学习日志</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
     
-    <title>caffe(初识2) | 飓风神龙</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+      <a href="https://github.com/WingsofFAN" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="100" height="100" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    </div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
     
-    
-      <link rel="icon" href="/favicon.png">
-    
 
-    <link rel="stylesheet" href="/css/style.css">
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">学习日志</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天行健，君子当自强不息</p>
+      
+  </div>
 
-    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
-
-  </head>
-
-  <body>
-
-<header>
-	<a id="logo" href="/" title="飓风神龙">
-	<img src="/favicon.png" alt="飓风神龙"></a>
-	
-	
-		<!--搜索栏-->
-		<i class="js-toggle-search iconfont icon-search"></i>
-
-
-<form class="js-search search-form search-form--modal" method="get" action="http://gushi.li" role="search">
-	<div class="search-form__inner">
-		<div>
-			<i class="iconfont icon-search"></i>
-			<input class="text-input" placeholder="Enter Key..." type="search">
-		</div>
-	</div>
-</form>
-	
-
-	
-		<!--侧边导航栏-->
-		<a id="nav-toggle" href="#"><span></span></a>
-
-<nav>
-	<div class="menu-top-container">
-		<ul id="menu-top" class="menu">
-			
-				
-				<li class="current-menu-item">
-					<a href="http://weibo.com/" target="_blank">Weibo</a>
-				</li>
-			
-		</ul>
-	</div>
-</nav>
-	
-
-</header>
-<div class="m-header ">
-	<section id="hero1" class="hero">
-		<div class="inner">
-		</div>
-	</section>
-	
-		<figure class="top-image" data-enable=true></figure>
-	
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-<!--文章列表-->
-<div class="wrapper">
-  
-    <!--文章-->
-<article>
-	
-  
-    <h1 class="post-title" itemprop="name">
-      caffe(初识2)
-    </h1>
+<nav class="site-nav">
   
 
-	<div class='post-body mb'>
-		<h1 id="caffe环境配置"><a href="#caffe环境配置" class="headerlink" title="caffe环境配置"></a>caffe环境配置</h1><h2 id="caffe的依赖库简介"><a href="#caffe的依赖库简介" class="headerlink" title="caffe的依赖库简介"></a>caffe的依赖库简介</h2><h3 id="ProtoBuffer"><a href="#ProtoBuffer" class="headerlink" title="ProtoBuffer"></a>ProtoBuffer</h3><p>Google Protocol Buffer (简称ProtoBuf) 是一种轻便高效的结构化数据存储格式，可以用于结构化数据的串行化，或者说序列化。它很合适做数据存储或RPC数据的交换格式。可以用于通信协议、数据存储等领域的语言无关、平台无关、可扩展的序列结构数据格式。<br>要使用Protobuf库，首先需要自己编写一个.proto文件，定义程序中需要处理的结构化数据，在Protobuf中，结构化数据被称为Message。在一个.proto文件中可以定义多喝消息类型。用Protobuf编译器（protoc.exe）将.proto文件编译成目标语言，会生成对应的.h文件和.cc文件，.proto文件中的每一个消息有一个对应的类。<br>Caffe使用起来很简洁，很大程度上是由于Caffe采用了.proto文件作为用户输入的接口。用户通过编写.proto文件定义网路模型和Solver。</p>
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/undefined/caffe-19-12-04/2019/12/04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飓风神龙">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="学习日志">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">caffe(初识2)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-04T16:49:07+08:00">
+                2019-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/caffe%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">caffe基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="caffe环境配置"><a href="#caffe环境配置" class="headerlink" title="caffe环境配置"></a>caffe环境配置</h1><h2 id="caffe的依赖库简介"><a href="#caffe的依赖库简介" class="headerlink" title="caffe的依赖库简介"></a>caffe的依赖库简介</h2><h3 id="ProtoBuffer"><a href="#ProtoBuffer" class="headerlink" title="ProtoBuffer"></a>ProtoBuffer</h3><p>Google Protocol Buffer (简称ProtoBuf) 是一种轻便高效的结构化数据存储格式，可以用于结构化数据的串行化，或者说序列化。它很合适做数据存储或RPC数据的交换格式。可以用于通信协议、数据存储等领域的语言无关、平台无关、可扩展的序列结构数据格式。<br>要使用Protobuf库，首先需要自己编写一个.proto文件，定义程序中需要处理的结构化数据，在Protobuf中，结构化数据被称为Message。在一个.proto文件中可以定义多喝消息类型。用Protobuf编译器（protoc.exe）将.proto文件编译成目标语言，会生成对应的.h文件和.cc文件，.proto文件中的每一个消息有一个对应的类。<br>Caffe使用起来很简洁，很大程度上是由于Caffe采用了.proto文件作为用户输入的接口。用户通过编写.proto文件定义网路模型和Solver。</p>
 <p><em>简单来说，ProtoBuffer就是caffe保存模型和解析模型用的数据格式。</em></p>
 <h3 id="Boost"><a href="#Boost" class="headerlink" title="Boost"></a>Boost</h3><p>Boost是为C++语言标准库提供扩展的一些C++程序库的总称。Boost库是一个可移植、提供源代码的C++库，作为标准库的后备，是C++标准化进程的开发引擎之一，是为C++语言标准库提供扩展的一些C++程序库的总称。<br>按照实现的功能，Boost可为大致归入下20个分类，在分类中，有些库同时归入几种类别：<br>boost字符串和文本处理库、boost容器库、boost迭代器库、boost算法库、boost函数对象和高阶编程库、boost泛型编程库、boost模板元编程、boost预处理元编程库、boost并发编程库、boost数学和数字库、boost排错和测试库、boost数据结构库、boost图像处理库、boost输入输出库、boost跨语言混合编程库、boost内存管理库、boost解析库、boost编程接口库、boost综合类库、boost编译器问题的变通方案库等。<br>Caffe采用C++作为主开发语言，其中大量的代码依赖于Boost库。</p>
 <p><em>高级的C++库，之后需要学习一下。</em></p>
@@ -92,81 +356,99 @@
 <p><em>LMDB已经替代了LEVELDB，但是为了与以前的版本兼容，仍然将这个依赖库编译到Caffe中。</em></p>
 <h3 id="BLAS"><a href="#BLAS" class="headerlink" title="BLAS"></a>BLAS</h3><p>卷积神经网络中用到的数学计算主要是矩阵、向量的计算，Caffe中调用了BLAS(Basic Linear Algebra Subprograms,基本线性代数子程序)中的相应方法。最常见的BLAS实现有IntelMKL、ATLAS、OpenBLAS等，Caffe可以选择其中任一种。</p>
 <p><em>在Makefile.config可以配置选择。</em></p>
-<h2 id="安装实战-ubuntu"><a href="#安装实战-ubuntu" class="headerlink" title="安装实战(ubuntu)"></a>安装实战(ubuntu)</h2><h3 id="依赖库安装"><a href="#依赖库安装" class="headerlink" title="依赖库安装"></a>依赖库安装</h3><h4 id="可以直接用apt-get直接安装的依赖库"><a href="#可以直接用apt-get直接安装的依赖库" class="headerlink" title="可以直接用apt-get直接安装的依赖库"></a>可以直接用apt-get直接安装的依赖库</h4><pre><code class="sh">    sudo apt-get install git
+<h2 id="安装实战-ubuntu"><a href="#安装实战-ubuntu" class="headerlink" title="安装实战(ubuntu)"></a>安装实战(ubuntu)</h2><h3 id="依赖库安装"><a href="#依赖库安装" class="headerlink" title="依赖库安装"></a>依赖库安装</h3><h4 id="可以直接用apt-get直接安装的依赖库"><a href="#可以直接用apt-get直接安装的依赖库" class="headerlink" title="可以直接用apt-get直接安装的依赖库"></a>可以直接用apt-get直接安装的依赖库</h4><pre><code class="lang-sh">    sudo apt-get install git
     sudo apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libboost-all-dev libhdf5-serial-dev python-dev
-    sudo apt-get install -y libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler openblas-dev</code></pre>
-<h4 id="可能编译安装其他依赖库时会用到的依赖库"><a href="#可能编译安装其他依赖库时会用到的依赖库" class="headerlink" title="可能编译安装其他依赖库时会用到的依赖库"></a>可能编译安装其他依赖库时会用到的依赖库</h4><pre><code class="sh">    sudo apt-get install -y protobuf-c-compiler
+    sudo apt-get install -y libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler openblas-dev
+</code></pre>
+<h4 id="可能编译安装其他依赖库时会用到的依赖库"><a href="#可能编译安装其他依赖库时会用到的依赖库" class="headerlink" title="可能编译安装其他依赖库时会用到的依赖库"></a>可能编译安装其他依赖库时会用到的依赖库</h4><pre><code class="lang-sh">    sudo apt-get install -y protobuf-c-compiler
     sudo apt-get install libffi-dev python-dev build-essential
-    sudo apt-get install autoconf automake libtool</code></pre>
+    sudo apt-get install autoconf automake libtool
+</code></pre>
 <h3 id="配置gpu"><a href="#配置gpu" class="headerlink" title="配置gpu"></a>配置gpu</h3><h4 id="安装Nvidia显卡驱动"><a href="#安装Nvidia显卡驱动" class="headerlink" title="安装Nvidia显卡驱动"></a>安装Nvidia显卡驱动</h4><h5 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h5><ul>
-<li>查看显卡连接，确认显卡硬件正确连接<pre><code class="sh">  lspci | grep -I nvidia</code></pre>
+<li>查看显卡连接，确认显卡硬件正确连接<pre><code class="lang-sh">  lspci | grep -I nvidia
+</code></pre>
 </li>
 <li>Nvidia官网下载与系统和显卡版本对应的显卡驱动进行安装，不要使用其他辅助安装工具容易出错</li>
 </ul>
 <p>删除以前的驱动，防止相互干扰</p>
-<pre><code class="sh">    sudo apt-get remove --purge nvidia*</code></pre>
+<pre><code class="lang-sh">    sudo apt-get remove --purge nvidia*
+</code></pre>
 <p>安装一些必要的库</p>
-<pre><code class="sh">    sudo apt-get update
-    sudo apt-get install dkms build-essential linux-headers-generic</code></pre>
+<pre><code class="lang-sh">    sudo apt-get update
+    sudo apt-get install dkms build-essential linux-headers-generic
+</code></pre>
 <h5 id="禁用nouveau"><a href="#禁用nouveau" class="headerlink" title="禁用nouveau"></a>禁用nouveau</h5><ul>
 <li>打开blacklist.conf, 在最后加入禁用nouveau的设置, 这是一个开源驱动, 如图所示：</li>
 </ul>
-<pre><code class="sh">    blacklist nouveau
+<pre><code class="lang-sh">    blacklist nouveau
     blacklist lbm-nouveau
     options nouveau modeset=0
     alias nouveau off
-    alias lbm-nouveau off</code></pre>
+    alias lbm-nouveau off
+</code></pre>
 <ul>
 <li>禁用nouveau内核模块</li>
 </ul>
-<pre><code class="sh">    echo options nouveau modeset=0
-    sudo update-initramfs -u</code></pre>
+<pre><code class="lang-sh">    echo options nouveau modeset=0
+    sudo update-initramfs -u
+</code></pre>
 <ul>
-<li><p>检查是否禁用成功，<strong>重启后执行以下命令，若无任何打印内容</strong>，则禁用成功</p>
-<pre><code class="sh">  lsmod | grep nouveau</code></pre>
+<li>检查是否禁用成功，<strong>重启后执行以下命令，若无任何打印内容</strong>，则禁用成功<pre><code class="lang-sh">  lsmod | grep nouveau
+</code></pre>
 <h5 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h5></li>
-<li><p>首先关闭图形界面</p>
-<pre><code class="sh">  sudo systemctl set-default multi-user.target
-  sudo reboot</code></pre>
+<li>首先关闭图形界面<pre><code class="lang-sh">  sudo systemctl set-default multi-user.target
+  sudo reboot
+</code></pre>
 </li>
 <li><p>执行从官网下载的.run脚本</p>
-<pre><code class="sh">  sudo chmod u+x NVIDIA-Linux-x86_64-390.87.run 
-  sudo ./NVIDIA-Linux-x86_64-390.87.run </code></pre>
+<pre><code class="lang-sh">  sudo chmod u+x NVIDIA-Linux-x86_64-390.87.run 
+  sudo ./NVIDIA-Linux-x86_64-390.87.run
+</code></pre>
 <p>或是视情况而定</p>
-<pre><code class="sh">  sudo ./NVIDIA-Linux-x86_64-390.87.run –no-opengl-files</code></pre>
+<pre><code class="lang-sh">  sudo ./NVIDIA-Linux-x86_64-390.87.run –no-opengl-files
+</code></pre>
 </li>
 <li><p>若安装失败 则应先卸载已安装部分</p>
-<pre><code class="sh">  sudo ./NVIDIA-Linux-x86_64-390.87.run –uninstall</code></pre>
+<pre><code class="lang-sh">  sudo ./NVIDIA-Linux-x86_64-390.87.run –uninstall
+</code></pre>
 </li>
-<li><p>中间可能会有报错，缺乏各种依赖库<br>若弹出Unable to find a suitable destination to install 32-bit compatibility libraries on Ubuntu 18.04 Bionic Beaver Linux的bug</p>
-<pre><code class="sh">  sudo dpkg --add-architecture i386
+<li>中间可能会有报错，缺乏各种依赖库<br>若弹出Unable to find a suitable destination to install 32-bit compatibility libraries on Ubuntu 18.04 Bionic Beaver Linux的bug<pre><code class="lang-sh">  sudo dpkg --add-architecture i386
   sudo apt update
-  sudo apt install libc6:i386</code></pre>
+  sudo apt install libc6:i386
+</code></pre>
 </li>
-<li><p>安装完后，执行指令可以查看gpu的状态，则证明</p>
-<pre><code class="sh">  nvidia-smi</code></pre>
+<li>安装完后，执行指令可以查看gpu的状态，则证明<pre><code class="lang-sh">  nvidia-smi
+</code></pre>
 </li>
 </ul>
 <h4 id="安装cuda"><a href="#安装cuda" class="headerlink" title="安装cuda"></a>安装cuda</h4><ul>
-<li>先把前置需要的库安装上<pre><code class="sh">  sudo apt-get install freeglut3-dev libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev</code></pre>
+<li>先把前置需要的库安装上<pre><code class="lang-sh">  sudo apt-get install freeglut3-dev libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev
+</code></pre>
 </li>
-<li>然后从官网上下载，并用md5检查下下载的安装包是否受损<pre><code class="sh">  md5sum cuda_10.0.130_410.48_linux.run</code></pre>
+<li>然后从官网上下载，并用md5检查下下载的安装包是否受损<pre><code class="lang-sh">  md5sum cuda_10.0.130_410.48_linux.run
+</code></pre>
 </li>
-<li>开始安装cuda，安装时可以暂时不安装OpenGL<pre><code class="sh">  sudo sh cuda_10.0.130_410.48_linux.run –no-opengl-files</code></pre>
+<li>开始安装cuda，安装时可以暂时不安装OpenGL<pre><code class="lang-sh">  sudo sh cuda_10.0.130_410.48_linux.run –no-opengl-files
+</code></pre>
 </li>
-<li>添加环境变量<pre><code class="sh">  vim ~/.bashrc</code></pre>
-在其中写入<pre><code class="sh">  export CUDA_HOME=/usr/local/cuda
+<li>添加环境变量<pre><code class="lang-sh">  vim ~/.bashrc
+</code></pre>
+在其中写入<pre><code class="lang-sh">  export CUDA_HOME=/usr/local/cuda
   export PATH=$PATH:$CUDA_HOME/bin
-  export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}</code></pre>
-保存后，并执行<pre><code>  source ~/.bashrc</code></pre></li>
+  export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+</code></pre>
+保存后，并执行<pre><code>  source ~/.bashrc
+</code></pre></li>
 <li>查看cuda的版本，判断是否安装成功</li>
 </ul>
-<pre><code>    nvcc -V</code></pre><h3 id="编译安装caffe"><a href="#编译安装caffe" class="headerlink" title="编译安装caffe"></a>编译安装caffe</h3><ul>
+<pre><code>    nvcc -V
+</code></pre><h3 id="编译安装caffe"><a href="#编译安装caffe" class="headerlink" title="编译安装caffe"></a>编译安装caffe</h3><ul>
 <li>先下载源码</li>
 </ul>
 <pre><code>    git clone https//github.com/bvlc/caffe.git
     cd caffe/
-    mv Makefile.config.example Makefile.confile</code></pre><ul>
+    mv Makefile.config.example Makefile.confile
+</code></pre><ul>
 <li>看懂并修改配置文件</li>
 </ul>
 <pre><code>    # Refer to http://caffe.berkeleyvision.org/installation.html
@@ -307,144 +589,416 @@
     Q ?= @
 
     CXXFLAGS+=-std=c++11
-    CUSTOM_CXX := g++ -std=c++11</code></pre><ul>
+    CUSTOM_CXX := g++ -std=c++11
+</code></pre><ul>
 <li>修改Makefile中的链接库</li>
 </ul>
 <p>将：</p>
-<pre><code>NVCCFLAGS +=-ccbin=$(CXX) -Xcompiler-fPIC $(COMMON_FLAGS)</code></pre><p>替换为：</p>
-<pre><code>NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)</code></pre><p>将：</p>
-<pre><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5</code></pre><p>改为：</p>
-<pre><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial</code></pre><ul>
+<pre><code>NVCCFLAGS +=-ccbin=$(CXX) -Xcompiler-fPIC $(COMMON_FLAGS)
+</code></pre><p>替换为：</p>
+<pre><code>NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)
+</code></pre><p>将：</p>
+<pre><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5
+</code></pre><p>改为：</p>
+<pre><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial
+</code></pre><ul>
 <li><p>开始编译</p>
-<pre><code class="shell">  makedir build
+<pre><code class="lang-shell">  makedir build
   cd build
   cmake ..
   make -j8
   make runtest -j8
-  make pycaffe -j8</code></pre>
+  make pycaffe -j8
+</code></pre>
 </li>
 <li><p>安装一下python的依赖</p>
 </li>
 </ul>
-<pre><code class="shell">    cd python
-    pip install --yes --file requirements.txt</code></pre>
+<pre><code class="lang-shell">    cd python
+    pip install --yes --file requirements.txt
+</code></pre>
 <h3 id="采坑记录"><a href="#采坑记录" class="headerlink" title="采坑记录"></a>采坑记录</h3>
-	</div>
-	<div class="meta split">
-		
-			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
-		
-		<time class="post-date" datetime="2019-12-04T08:49:07.000Z" itemprop="datePublished">2019-12-04</time>
-	</div>
-</article>
+      
+    </div>
+    
+    
+    
 
-<!--评论-->
+    
 
-	
-<div class="ds-thread" data-thread-key="caffe-19-12-04" data-title="caffe(初识2)" data-url="http://yoursite.com/undefined/caffe-19-12-04/2019/12/04/"></div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/caffe/" rel="tag"># caffe</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/undefined/caffe-19-12-03/2019/12/03/" rel="next" title="caffe(初识1)">
+                <i class="fa fa-chevron-left"></i> caffe(初识1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/undefined/markdown-19-12-15/2019/12/15/" rel="prev" title="Markdown+HTML">
+                Markdown+HTML <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="飓风神龙" />
+            
+              <p class="site-author-name" itemprop="name">飓风神龙</p>
+              <p class="site-description motion-element" itemprop="description">苦逼研究生的搬砖日常</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#caffe环境配置"><span class="nav-number">1.</span> <span class="nav-text">caffe环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#caffe的依赖库简介"><span class="nav-number">1.1.</span> <span class="nav-text">caffe的依赖库简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ProtoBuffer"><span class="nav-number">1.1.1.</span> <span class="nav-text">ProtoBuffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boost"><span class="nav-number">1.1.2.</span> <span class="nav-text">Boost</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GFlags"><span class="nav-number">1.1.3.</span> <span class="nav-text">GFlags</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GLog"><span class="nav-number">1.1.4.</span> <span class="nav-text">GLog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HDF5"><span class="nav-number">1.1.5.</span> <span class="nav-text">HDF5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LevelDB-LMDB"><span class="nav-number">1.1.6.</span> <span class="nav-text">LevelDB LMDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BLAS"><span class="nav-number">1.1.7.</span> <span class="nav-text">BLAS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装实战-ubuntu"><span class="nav-number">1.2.</span> <span class="nav-text">安装实战(ubuntu)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖库安装"><span class="nav-number">1.2.1.</span> <span class="nav-text">依赖库安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可以直接用apt-get直接安装的依赖库"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">可以直接用apt-get直接安装的依赖库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可能编译安装其他依赖库时会用到的依赖库"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">可能编译安装其他依赖库时会用到的依赖库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置gpu"><span class="nav-number">1.2.2.</span> <span class="nav-text">配置gpu</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Nvidia显卡驱动"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">安装Nvidia显卡驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装前准备"><span class="nav-number">1.2.2.1.1.</span> <span class="nav-text">安装前准备</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#禁用nouveau"><span class="nav-number">1.2.2.1.2.</span> <span class="nav-text">禁用nouveau</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装驱动"><span class="nav-number">1.2.2.1.3.</span> <span class="nav-text">安装驱动</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装cuda"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">安装cuda</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译安装caffe"><span class="nav-number">1.2.3.</span> <span class="nav-text">编译安装caffe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#采坑记录"><span class="nav-number">1.2.4.</span> <span class="nav-text">采坑记录</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飓风神龙</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
 <script type="text/javascript">
-
-var duoshuoQuery = {short_name:"yumemor"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
+
+
+
+
+
+
+
   
-</div>
 
 
-  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
-    <path d="M0 0 L50 100 L100 0 Z"></path>
-  </svg>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
 
   
 
 
-  <div class="wrapper"></div>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
 
 
 
 
-
-<div class="fat-footer">
-	<div class="wrapper">
-		<div class="layout layout--center">
-			<div class="layout__item palm-mb">
-				<div class="media">
-					<img class="headimg" src='https://imgchr.github.la/steve.jpeg' alt='飓风'>
-					<div class="media__body">
-						<h4>justpsvm</h4>
-						<p class='site-description'>Stay Hungry,Stay Foolish.</p>
-					</div>
-				</div>
-				<div class="author-contact">
-					<ul>
-						
-							
-							<li>
-				        		<a href="http://weibo.com/" target="_blank">
-				        			
-				        				<i class="iconfont icon-weibo"></i>
-				        			
-				        		</a>
-				        	</li>
-						
-							
-							<li>
-				        		<a href="https://github.com/" target="_blank">
-				        			
-				        				<i class="iconfont icon-github"></i>
-				        			
-				        		</a>
-				        	</li>
-						
-							
-							<li>
-				        		<a href="https://www.zhihu.com/" target="_blank">
-				        			
-										<i class="iconfont icon-zhihu"></i>
-				        			
-				        		</a>
-				        	</li>
-						
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<footer class="footer" role="contentinfo">
-	<div class="wrapper wrapper--wide split split--responsive">
-		
-			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
-		
-		<span>Theme by <a href="http://github.com/justpsvm" target="_blank" rel="noopener">justpsvm</a>. Powered by <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a></span>
-	</div>
-</footer>
-
-	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
-	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
-	<script src="/js/lib.js"></script>
-	<script src="/js/google-code-prettify/prettify.js"></script>
-	<script src="/js/module.js"></script>
-	<script src="/js/script.js"></script>
 	
-		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-	
-	<script type='text/javascript'>
-		//代码高亮
-		$(document).ready(function(){
-	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
-   			prettyPrint();
-		});
-	</script>
-	</body>
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
 </html>
