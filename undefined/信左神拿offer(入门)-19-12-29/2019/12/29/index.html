@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/fan-128x128.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/fan-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/fan-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/fan.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,c++," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="信左神拿offer(入门一)基础概念时间复杂度 常数操作：一个操作如果和样本的数据量没有关系，每次都是固定时间内完成的操作。 如从数组中拿出某个元素是常数操作，而从列表中拿出某个元素不是常数操作。  时间复杂度(粗略认识)：常数操作表达式中，只看高阶项，且忽略系数后所留下的东西。 为什么忽略系数和低阶项？因为当数据量大到一定规模时，起到绝对影响的就是留下的高阶项表达式。（一定是考虑最差情况） 最差">
+<meta name="keywords" content="算法,c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信左神拿offer(入门一)">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;undefined&#x2F;%E4%BF%A1%E5%B7%A6%E7%A5%9E%E6%8B%BFoffer(%E5%85%A5%E9%97%A8)-19-12-29&#x2F;2019&#x2F;12&#x2F;29&#x2F;index.html">
+<meta property="og:site_name" content="学习日志">
+<meta property="og:description" content="信左神拿offer(入门一)基础概念时间复杂度 常数操作：一个操作如果和样本的数据量没有关系，每次都是固定时间内完成的操作。 如从数组中拿出某个元素是常数操作，而从列表中拿出某个元素不是常数操作。  时间复杂度(粗略认识)：常数操作表达式中，只看高阶项，且忽略系数后所留下的东西。 为什么忽略系数和低阶项？因为当数据量大到一定规模时，起到绝对影响的就是留下的高阶项表达式。（一定是考虑最差情况） 最差">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-29T10:39:09.923Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/undefined/信左神拿offer(入门)-19-12-29/2019/12/29/"/>
+
+
+
+
+
+  <title>信左神拿offer(入门一) | 学习日志</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+      <a href="https://github.com/WingsofFAN" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="100" height="100" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    </div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">学习日志</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天行健，君子当自强不息</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/undefined/%E4%BF%A1%E5%B7%A6%E7%A5%9E%E6%8B%BFoffer(%E5%85%A5%E9%97%A8)-19-12-29/2019/12/29/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飓风神龙">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="学习日志">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信左神拿offer(入门一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-29T18:00:00+08:00">
+                2019-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E5%B7%A6%E7%A5%9E%E6%8B%BFoffer/" itemprop="url" rel="index">
+                    <span itemprop="name">信左神拿offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="信左神拿offer-入门一"><a href="#信左神拿offer-入门一" class="headerlink" title="信左神拿offer(入门一)"></a>信左神拿offer(入门一)</h1><h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><ul>
+<li><p>常数操作：一个操作如果和样本的数据量没有关系，每次都是固定时间内完成的操作。</p>
+<p><em>如从数组中拿出某个元素是常数操作，而从列表中拿出某个元素不是常数操作。</em></p>
+</li>
+<li><p>时间复杂度(粗略认识)：常数操作表达式中，只看高阶项，且忽略系数后所留下的东西。</p>
+<p><em>为什么忽略系数和低阶项？因为当数据量大到一定规模时，起到绝对影响的就是留下的高阶项表达式。</em>（一定是考虑最差情况）</p>
+<p><em>最差复杂 O()，平均复杂Θ()，最好复杂Ω()</em></p>
+<p>当时间复杂度相同时，只能通过实际测试去比较。系数所代表的常数操作的固定时间有可能不同。<strong>评价一个算法流程的好坏，先看时间复杂度的指标，然后再分析不同数据样本下的实际运行 时间，也就是“常数项时间“。</strong></p>
+</li>
+</ul>
+<h3 id="而外空间复杂度"><a href="#而外空间复杂度" class="headerlink" title="而外空间复杂度"></a>而外空间复杂度</h3><ul>
+<li>而外空间：用于辅助算法流程时，新申请的变量空间</li>
+<li>而外空间复杂度：而外空间表达式中，只看高阶项，且忽略系数后所留下的东西。</li>
+</ul>
+<h2 id="简单排序算法"><a href="#简单排序算法" class="headerlink" title="简单排序算法"></a>简单排序算法</h2><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><blockquote>
+<ul>
+<li>遍历一遍数组中所有的数（每遍历一个数算是一次常数操作）；</li>
+<li>遍历时进行比较（遍历一个数就比一次，也是常数操作），找到最小元素；</li>
+<li>让最小元素和第一个元素进行交换；</li>
+<li>重复上述三个过程找到次小元素，次次小元素……直到数组结束。</li>
+</ul>
+</blockquote>
+<p><strong>遍历了(n)+(n-1)+(n-2)+…+1个元素，比较了(n)+(n-1)+(n-2)+…+1次，交换了n次；所以一共进行了（ann+bn+c）次常数操作，那么时间复杂度就是O(nn)。因为只用到了有限的几个变量，而外空间复杂度为O(1)。</strong></p>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><blockquote>
+<ul>
+<li>依次遍历比较两个相邻元素</li>
+<li>若大的在前，则和其后的小元素进行交换</li>
+<li>遍历一遍后，最小元素已被排到第一的位置，从位置二开始重复上述两步，依次递减处理长度，直到剩下一个元素时。</li>
+</ul>
+</blockquote>
+<p><strong>时间复杂度O(nn),空间复杂度O(1)</strong></p>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><blockquote>
+<ul>
+<li>依次遍历元素，若元素小于其前面的有序序列</li>
+<li>则让该元素和其前面的元素依次交换，直到他不小于其前一个元素</li>
+<li>此时，有序序列长度增加一，并从有序序列的下一个元素开始重复第一步</li>
+<li>直到遍历完所有元素</li>
+</ul>
+</blockquote>
+<p><strong>时间复杂度：数据状况会影响到处理时间，最差情况为O(nn),最佳情况O(n),但是时间复杂度只考虑遇到的最差情况，所以为O(nn)</strong></p>
+<pre><code class="lang-c++">//插入排序实现
+template&lt;typename T&gt;
+void InsertSort(vector&lt;T&gt;&amp; nums)
+{
+    if(nums.size() &lt; 2)
+    {    
+        return;
+    }
+    for(int i = 1 ;i &lt; nums.size();i++)
+    {
+        for(int j = i ; j&gt;0 &amp;&amp; nums[j]&lt;nums[j-1];j--)
+        {
+            swap(nums,j,j-1);
+        }
+    }
+}
+</code></pre>
+<h2 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h2><ul>
+<li><p>用于快速查找，如在一个有序数列中寻找某值，每次与中点数值进行比较，若大于它则下次在后半区间内进行迭代，若小于它则下次在前半区间内进行迭代，则仅需进行log2(n)次寻址迭代就可以找到。</p>
+</li>
+<li><p>在上面基础上进行细化处理找到有序数列，大于等于某值的最左侧位置：</p>
+<pre><code class="lang-c++">//    1 2 2 2 2 2 3 3 3 3 3 4 4 4 4 4 5 5 5 5 5 5 5 6
+//一                        √
+//二            ×
+//三                   √
+//四                 √
+//五               √  
+//最左侧对号就是我们要的位置
+int upper(vector&lt;int&gt; nums,int d)
+{
+
+}
+</code></pre>
+</li>
+<li><p>局部最小值问题</p>
+<p>在一个无序数组中任何两个相邻的数不相等，<strong>局部最小是该位置小于相邻位置的数</strong>，求一个局部最小值位置，要求时间复杂度为O(n)。</p>
+</li>
+</ul>
+<p><strong>任何流程的优化方向就是：数据状况，问题求解。</strong></p>
+<p><strong>二分适用情况：每步流程可以筛选一半数据的情况都可以套用，但不一定就最优。</strong></p>
+<h2 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h2><p>异或运算：相同为零，不同为一。二进制的无进位相加。</p>
+<h3 id="用于交换"><a href="#用于交换" class="headerlink" title="用于交换"></a>用于交换</h3><p>性质：</p>
+<pre><code class="lang-c++">// 1. 0^N =N; N^N = 0
+// 2. a^b = b^a;(a^b^c) = a^(b^c) 
+// 3. 所有元素用^运算连接时，无先后顺序的区别
+
+//用于交换操作，无需使用而外的变量
+// a = 甲   b = 乙
+void swap(a, b)
+{
+    a = a ^ b;     //a = 甲^乙  b = 乙
+    b = a ^ b;     //a = 甲^乙  b = 甲^乙^乙 = 甲^0 = 甲
+    a = a ^ b;     //a = 甲^乙^甲 = 甲^甲^乙 = 0^乙 = 乙 b = 甲
+}
+</code></pre>
+<p><strong>使用前提：a与b在内存中是独立的，即要有两块独立的内存。否则会将该位置的内存清零。</strong></p>
+<h3 id="面试真题"><a href="#面试真题" class="headerlink" title="面试真题"></a>面试真题</h3><pre><code class="lang-c++">//1.一种数出现了奇数次，其他数出现偶数次 
+//2.两种数出项了奇数次，其他数出现偶数次 
+//要求时间O(n),空间O(1)
+//
+vector&lt;int&gt; find_odd(vector&lt;int&gt;&amp; nums)
+{
+    if(nums.empty())
+        return NULL;
+
+    int f = 0;
+    for(int i = 0;i &lt; nums.size();i++)
+    {
+        f ^= nums[i];
+    }
+    vector&lt;int&gt; R;
+    R.push_back(f);
+    return R;
+}
+
+vector&lt;int&gt; find_two_odd(vector&lt;int&gt;&amp; nums)
+{
+    if(nums.empty())
+        return NULL;
+    vector&lt;int&gt; R;
+    int f = 0;
+    for(int i = 0;i &lt; nums.size();i++)
+    {
+        f ^= nums[i]; 
+    }
+    //此处得到的是a^b
+
+    //因为a，b不相等，所以a^b ≠ 0
+    //那么必定存在a与b在某一位上不同，取出该位用于区分a与b
+    int right = f &amp; (~f +1);
+    //即f中从优往左数的第一个1
+    int k = f;
+    for(int i = 0;i &lt; nums.size();i++)
+    {
+        if(nums[i]&amp;right == 0)
+            k ^= nums[i];               
+    }
+    //此处得到a（或b）
+    R.push_back(k);
+    R.push_back(f^k);
+    return R;
+}
+</code></pre>
+<h2 id="对数器"><a href="#对数器" class="headerlink" title="对数器"></a>对数器</h2><p>方法a：考虑各方面优化，不好想，也不好写，容易出错的方法。</p>
+<p>方法b：不考虑优化，很好想，也很好写，一定不会出错的方法。</p>
+<p>此时生成一个随机样本产生器，将生成的数据分别运用到方法a与方法b，得到结果a与结果b。</p>
+<p>先控制样本数量，采用人工推理来检查方法b与方法a，先确保方法b不出错，再修正方法a。</p>
+<p>若结果a和结果b在大量测试样本下都相等，则方法a正确可行。</p>
+<p>致敬左神的代码，改成用c++写的，测试自己写的插入排序：</p>
+<pre><code class="lang-c++">#include&lt;iostream&gt;
+#include&lt;vector&gt;
+#include&lt;random&gt;
+#include&lt;cassert&gt;
+#include&lt;algorithm&gt;
+#include&lt;ctime&gt;
+
+using namespace std;
+
+//swap
+template&lt;typename T&gt;
+void swap(std::vector&lt;T&gt;&amp; vec, int i, int j) {
+    vec[i] = vec[i] ^ vec[j];
+    vec[j] = vec[i] ^ vec[j];
+    vec[i] = vec[i] ^ vec[j];
+}
+
+
+//插入排序的实现
+template&lt;typename T&gt;
+void InsertSort(vector&lt;T&gt;&amp; nums)
+{
+    if(nums.size() &lt; 2)
+    {    
+        return;
+    }
+    for(int i = 1 ;i &lt; nums.size();i++)
+    {
+        for(int j = i ; j&gt;0 &amp;&amp; nums[j]&lt;nums[j-1];j--)
+        {
+            swap(nums,j,j-1);
+        }
+    }
+}
+
+// 随机序列生成器
+vector&lt;int&gt; generateRandomArray(int maxSize, int&amp; size, int minValue, int maxValue) {
+    assert(minValue &lt; maxValue);
+    size = e() % maxSize + 1;
+    vector&lt;int&gt; list(size);
+    for (int i = 0; i &lt; list.size(); i++) {
+        list[i] = e() % (maxValue - minValue) + minValue;
+    }
+    return list;
+}
+
+//序列拷贝
+vector&lt;int&gt; copyArray(vector&lt;int&gt; list, const int n) {
+    vector&lt;int&gt; list2(n);
+    list2.assign(list.begin(), list.end());
+    return list2;
+}
+//标准答案
+void rightMethod(vector&lt;int&gt;&amp; list) {
+    sort(list.begin(), list.end());
+}
+//比较函数
+bool isEqual(vector&lt;int&gt;&amp; list1, vector&lt;int&gt;&amp; list2, const int size) {
+    for (int i = 0; i &lt; size; i++) 
+    {
+        if (list1[i] != list2[i])
+        {
+            cout&lt;&lt; &quot;方法1：&quot;&lt;&lt;list1[i] &lt;&lt; &quot;方法2:&quot;&lt;&lt;list2[i]&lt;&lt;endl;//打印错误样本
+            return false;
+        }    
+    }
+    return true;
+}
+
+void testAlgorithm() {
+    int testTime = 500000;
+    int maxSize = 10;
+    int minValue = -100;
+    int maxValue = 100;
+    bool succeed = true;
+    clock_t startTime, endTime;
+    int size = 0;
+    startTime = clock();
+    for (int i = 0; i &lt; testTime; i++) {
+        vector&lt;int&gt; list = generateRandomArray(maxSize, size, minValue, maxValue);
+        vector&lt;int&gt; list1 = copyArray(list, size);
+        vector&lt;int&gt; list2 = copyArray(list, size);
+        InsertSort(list1);
+        rightMethod(list2, size);
+        if (!isEqual(list1, list2, size)) {
+            succeed = false;
+            break;
+        }
+    }
+    cout &lt;&lt; (succeed ? &quot;NICE&quot; : &quot;FUCKED&quot;) &lt;&lt; endl;
+    endTime = clock();
+    cout &lt;&lt; &quot;time cost:&quot; &lt;&lt; (double)(endTime - startTime) / CLOCKS_PER_SEC &lt;&lt; &quot;s&quot; &lt;&lt; endl;
+}
+
+int main()
+{
+    testAlgorithm();
+
+    system(&quot;PAUSE&quot;);
+    return 0;
+}
+</code></pre>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/undefined/markdown-19-12-15/2019/12/15/" rel="next" title="Markdown+HTML">
+                <i class="fa fa-chevron-left"></i> Markdown+HTML
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="飓风神龙" />
+            
+              <p class="site-author-name" itemprop="name">飓风神龙</p>
+              <p class="site-description motion-element" itemprop="description">苦逼研究生的搬砖日常</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#信左神拿offer-入门一"><span class="nav-number">1.</span> <span class="nav-text">信左神拿offer(入门一)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概念"><span class="nav-number">1.1.</span> <span class="nav-text">基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度"><span class="nav-number">1.1.1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#而外空间复杂度"><span class="nav-number">1.1.2.</span> <span class="nav-text">而外空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单排序算法"><span class="nav-number">1.2.</span> <span class="nav-text">简单排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择排序"><span class="nav-number">1.2.1.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序"><span class="nav-number">1.2.2.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">1.2.3.</span> <span class="nav-text">插入排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分法"><span class="nav-number">1.3.</span> <span class="nav-text">二分法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异或"><span class="nav-number">1.4.</span> <span class="nav-text">异或</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用于交换"><span class="nav-number">1.4.1.</span> <span class="nav-text">用于交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试真题"><span class="nav-number">1.4.2.</span> <span class="nav-text">面试真题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对数器"><span class="nav-number">1.5.</span> <span class="nav-text">对数器</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飓风神龙</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
