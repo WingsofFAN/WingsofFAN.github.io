@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Markdown," />
+  <meta name="keywords" content="算法,c++," />
 
 
 
@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="标题设置用‘#’设置    # 一级标题     ## 二级标题     ### 三级标题     #### 四级标题     ##### 五级标题     ###### 六级标题   一级标题二级标题三级标题四级标题五级标题六级标题用‘-’和‘&#x3D;’设置    一级标题     &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;     二级标题     ---------------------  只">
-<meta name="keywords" content="Markdown">
+<meta name="description" content="信左神拿offer(入门二)递归行为 定义：程序调用自身的编程技巧称为递归（ recursion）。  条件：  子问题须与原始问题为同样的事，且更为简单； 不能无限制地调用本身，须有个出口，化简为非递归状况处理   master 公式: N母问题的数据量；子问题的数据量N&#x2F;b，调用次数为a；O(NN)除去子问题后的其他流程的时间复杂度。子问题规模一样的递归才能使用master公式估计时间复杂度。">
+<meta name="keywords" content="算法,c++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Markdown 基础使用简介">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;undefined&#x2F;markdown-19-12-02&#x2F;2019&#x2F;12&#x2F;02&#x2F;index.html">
+<meta property="og:title" content="信左神拿offer(入门一)">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;undefined&#x2F;%E4%BF%A1%E5%B7%A6%E7%A5%9E%E6%8B%BFoffer(%E5%85%A5%E9%97%A8%E4%BA%8C)-19-12-30&#x2F;2019&#x2F;12&#x2F;30&#x2F;index.html">
 <meta property="og:site_name" content="学习日志">
-<meta property="og:description" content="标题设置用‘#’设置    # 一级标题     ## 二级标题     ### 三级标题     #### 四级标题     ##### 五级标题     ###### 六级标题   一级标题二级标题三级标题四级标题五级标题六级标题用‘-’和‘&#x3D;’设置    一级标题     &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;     二级标题     ---------------------  只">
+<meta property="og:description" content="信左神拿offer(入门二)递归行为 定义：程序调用自身的编程技巧称为递归（ recursion）。  条件：  子问题须与原始问题为同样的事，且更为简单； 不能无限制地调用本身，须有个出口，化简为非递归状况处理   master 公式: N母问题的数据量；子问题的数据量N&#x2F;b，调用次数为a；O(NN)除去子问题后的其他流程的时间复杂度。子问题规模一样的递归才能使用master公式估计时间复杂度。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;undefined&#x2F;markdown-19-12-02&#x2F;2019&#x2F;12&#x2F;02&#x2F;Markdown.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;undefined&#x2F;markdown-19-12-02&#x2F;2019&#x2F;12&#x2F;02&#x2F;fan.jpg">
-<meta property="og:updated_time" content="2019-12-15T13:53:40.741Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;undefined&#x2F;%E4%BF%A1%E5%B7%A6%E7%A5%9E%E6%8B%BFoffer(%E5%85%A5%E9%97%A8%E4%BA%8C)-19-12-30&#x2F;2019&#x2F;12&#x2F;30&#x2F;19-12&#x2F;zuo2.2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;undefined&#x2F;%E4%BF%A1%E5%B7%A6%E7%A5%9E%E6%8B%BFoffer(%E5%85%A5%E9%97%A8%E4%BA%8C)-19-12-30&#x2F;2019&#x2F;12&#x2F;30&#x2F;19-12&#x2F;zuo2.1.png">
+<meta property="og:updated_time" content="2019-12-30T15:27:47.233Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;undefined&#x2F;markdown-19-12-02&#x2F;2019&#x2F;12&#x2F;02&#x2F;Markdown.jpg">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;undefined&#x2F;%E4%BF%A1%E5%B7%A6%E7%A5%9E%E6%8B%BFoffer(%E5%85%A5%E9%97%A8%E4%BA%8C)-19-12-30&#x2F;2019&#x2F;12&#x2F;30&#x2F;19-12&#x2F;zuo2.2.png">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/undefined/markdown-19-12-02/2019/12/02/"/>
+  <link rel="canonical" href="http://yoursite.com/undefined/信左神拿offer(入门二)-19-12-30/2019/12/30/"/>
 
 
 
 
 
-  <title>Markdown 基础使用简介 | 学习日志</title>
+  <title>信左神拿offer(入门一) | 学习日志</title>
   
 
 
@@ -257,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/undefined/markdown-19-12-02/2019/12/02/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/undefined/%E4%BF%A1%E5%B7%A6%E7%A5%9E%E6%8B%BFoffer(%E5%85%A5%E9%97%A8%E4%BA%8C)-19-12-30/2019/12/30/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="飓风神龙">
@@ -274,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Markdown 基础使用简介</h1>
+          <h1 class="post-title" itemprop="name headline">信左神拿offer(入门一)</h1>
         
 
         <div class="post-meta">
@@ -286,8 +286,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-02T18:00:00+08:00">
-                2019-12-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-30T23:30:00+08:00">
+                2019-12-30
               </time>
             
 
@@ -309,8 +309,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/blog%E5%85%A5%E9%97%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">blog入门</span>
+                  <a href="/categories/%E4%BF%A1%E5%B7%A6%E7%A5%9E%E6%8B%BFoffer/" itemprop="url" rel="index">
+                    <span itemprop="name">信左神拿offer</span>
                   </a>
                 </span>
 
@@ -346,144 +346,256 @@
       
 
       
-        <p><img src="/undefined/markdown-19-12-02/2019/12/02/Markdown.jpg" alt="Markdown"></p>
-<h1 id="标题设置"><a href="#标题设置" class="headerlink" title="标题设置"></a>标题设置</h1><h2 id="用‘-’设置"><a href="#用‘-’设置" class="headerlink" title="用‘#’设置"></a>用‘#’设置</h2><pre><code class="lang-markdown">    # 一级标题
-    ## 二级标题
-    ### 三级标题
-    #### 四级标题
-    ##### 五级标题
-    ###### 六级标题
-</code></pre>
-<blockquote>
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><h2 id="用‘-’和‘-’设置"><a href="#用‘-’和‘-’设置" class="headerlink" title="用‘-’和‘=’设置"></a>用‘-’和‘=’设置</h2><pre><code class="lang-markdown">    一级标题
-    =====================
-    二级标题
-    ---------------------
-</code></pre>
-<p>只能标记出一级和二级标题</p>
-</blockquote>
-<h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><pre><code>    *斜体文本*
-    _斜体文本_
-    **粗体文本**
-    __粗体文本__
-    ***粗斜体文本***
-    ___粗斜体文本___
-</code></pre><blockquote>
-<p><em>斜体文本</em><br><em>斜体文本</em><br><strong>粗体文本</strong><br><strong>粗体文本</strong><br><strong><em>粗斜体文本</em></strong><br><strong><em>粗斜体文本</em></strong>        </p>
-</blockquote>
-<h1 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h1><pre><code class="lang-markdown">    ***
-    * * *
-    *****
-    - - -
-    ---------
-</code></pre>
-<blockquote>
-<hr>
-<hr>
-<hr>
-<h2 id><a href="#" class="headerlink" title="- - -"></a>- - -</h2></blockquote>
-<h1 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h1><pre><code>没被删除
-~~被删除~~
-</code></pre><blockquote>
-<p>没被删除<br><del>被删除</del></p>
-</blockquote>
-<h1 id="下划线"><a href="#下划线" class="headerlink" title="下划线"></a>下划线</h1><pre><code class="lang-markdown">    &lt;u&gt;带下划线文本&lt;/u&gt;
-</code></pre>
-<blockquote>
-<p><u>带下划线文本</u></p>
-</blockquote>
-<h1 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h1><pre><code class="lang-markdown">    你看不懂[^RUNOOB]
-    [^RUNOOB]：看不懂，读注释你也看不懂！
-</code></pre>
-<blockquote>
-<p>你看不懂<sup><a href="#fn_RUNOOB" id="reffn_RUNOOB">RUNOOB</a></sup></p>
-<p><sup><a href="#fn_RUNOOB" id="reffn_RUNOOB">RUNOOB</a></sup>:看不懂，读注释你也看不懂！</p>
-</blockquote>
-<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><pre><code class="lang-markdown">    * 第一项
-    * 第二项
-    * 第三项
+        <h1 id="信左神拿offer-入门二"><a href="#信左神拿offer-入门二" class="headerlink" title="信左神拿offer(入门二)"></a>信左神拿offer(入门二)</h1><h2 id="递归行为"><a href="#递归行为" class="headerlink" title="递归行为"></a>递归行为</h2><ul>
+<li><p>定义：程序调用自身的编程技巧称为递归（ recursion）。</p>
+</li>
+<li><p>条件：</p>
+<ul>
+<li>子问题须与原始问题为同样的事，且更为简单；</li>
+<li>不能无限制地调用本身，须有个出口，化简为非递归状况处理</li>
+</ul>
+</li>
+<li><p>master 公式:</p>
+<p>N母问题的数据量；子问题的数据量N/b，调用次数为a；O(NN)除去子问题后的其他流程的时间复杂度。<strong>子问题规模一样的递归才能使用master公式估计时间复杂度。</strong></p>
+<script type="math/tex; mode=display">
+T(N) = a*T(\frac {N}{b})+O(N^{d}) \\
+\begin {cases}
+\log_{b}{a}<d,O(N^{d}) \\
+\log_{b}{a}=d,O(N^{d}*\log_{2}N) \\
+\log_{b}{a}>d,O(N^{\log_{b}a}) \\
+\end {cases}</script></li>
+</ul>
+<p><strong>求数组中点位置：</strong></p>
+<pre><code class="lang-c++">//普通写法
+int mid =  (L+R)/2
+//由于L和R可能会过大，所以相加可能有溢出的危险
 
-    + 第一项
-    + 第二项
-    + 第三项
+//防止溢出的写法
+int mid = L +(R-L)&gt;&gt;1;
+//加会溢出，但是换成减就不会
+//除二换成右移一位，可以加快运算
+</code></pre>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><ul>
+<li><p>流程：</p>
+<blockquote>
+<ul>
+<li>从中点分开先让左侧有序，再让右侧有序</li>
+<li>若无序则递归</li>
+<li>合并有序两个序列的</li>
+</ul>
+</blockquote>
+</li>
+<li><p>代码</p>
+</li>
+</ul>
+<pre><code class="lang-c++">void merge(vector&lt;int&gt;&amp; arr,int L,int M,int R)
+{
+    vector&lt;int&gt; help(R-L+1);
+    int i = 0;
+    int p1 = L;
+    int p2 = M+1;
+    while(p1&lt;=M &amp;&amp; p2 &lt;= R)
+    {
+        help[i++] = arr[p1] &lt;= arr[p2] : arr[p1++] ? arr[p2++];
+    }
+    while(p1 &lt;= M)
+    {
+        help[i++] = arr[p1++];
+    }
+    while(p2 &lt;= R)
+    {
+        help[i++] = arr[p2++];
+    }
+    for (i = 0;i &lt; help.length;i++)
+    {
+        arr[L+i] = help[i];
+    }
+    help.release();
+}
 
-    - 第一项
-    - 第二项
-    - 第三项
+
+void mergeSort(vector&lt;int&gt; arr,int L,int R)
+{
+    if(L == R)
+    {
+        return;            //递归出口
+    }
+    int mid = L+(R-L)&gt;&gt;1;
+    mergeSort(arr,L,mid);
+    mergeSort(arr,mid+1,R);
+    merge(arr,L,mid,R);
+}
 </code></pre>
-<blockquote>
 <ul>
-<li>第一项</li>
-<li>第二项</li>
-<li>第三项</li>
-</ul>
+<li><p>优势：高效利用了比较行为，简单排序算法每排序一个数都是要进行单独一轮的比较，而并没有利用到上一个数比较时的结果。而归并在每一次比较后都被整体有序的部分保存了下来，提供给merge时使用。</p>
+</li>
+<li><p><strong>※</strong>小和问题：</p>
 <ul>
-<li>第一项</li>
-<li>第二项</li>
-<li>第三项</li>
+<li><p>在一个数组中，每一个数左边比当前数小的数累加起来，叫做这个数组 </p>
+<p>的小和。求一个数组 的小和。</p>
+</li>
+<li><p>例子:[1,3,4,2,5] 1左边比1小的数，没有; 3左边比3小的数，1; 4左 </p>
+<p>边比4小的数，1、3; 2左边比2小的数，1; 5左边比5小的数，1、3、4、 </p>
+<p>2; 所以小和为1+1+3+1+1+3+4+2=16</p>
+</li>
 </ul>
+<p>```c++<br>int merge(vector<int>&amp; arr,int L,int M,int R)<br>{</int></p>
+<pre><code>vector&lt;int&gt; help(R-L+1);
+int i = 0;
+int p1 = L;
+int p2 = M+1;
+int res = 0;
+while(p1&lt;=M &amp;&amp; p2 &lt;= R)
+{
+    res += arr[p1] &lt; arr[p2] ? (r - p2 + 1)*arr[p1]:0;   //求小和
+    help[i++] = arr[p1] &lt;= arr[p2] : arr[p1++] ? arr[p2++];
+}
+while(p1 &lt;= M)
+{
+    help[i++] = arr[p1++];
+}
+while(p2 &lt;= R)
+{
+    help[i++] = arr[p2++];
+}
+for (i = 0;i &lt; help.length;i++)
+{
+    arr[L+i] = help[i];
+}
+help.release();
+return res;
+</code></pre><p>}</p>
+</li>
+</ul>
+<p>  int process(vector<int> arr,int L,int R)<br>  {<br>      if(L == R)<br>      {<br>          return 0;            //递归出口<br>      }<br>      int mid = L+(R-L)&gt;&gt;1;<br>      return process(arr,L,mid) </int></p>
+<pre><code>      +  process(arr,mid+1,R)
+      +  merge(arr,L,mid,R);
+</code></pre><p>  }</p>
+<p>  int smallSum(vector<int>&amp; arr)<br>  {<br>      if(arr == NULL || arr.size() &lt; 2)<br>      {<br>          return 0;<br>      }<br>      return process(arr,0,arr.size()-1);<br>  }</int></p>
+<pre><code>
+
+
+* 逆序对：逆序对问题 在一个数组中，左边的数如果比右边的数大，则折两个数 
+
+  构成一个逆序对，请打印所有逆序对。
+
+  ```c++
+  int merge(vector&lt;int&gt;&amp; arr,int L,int M,int R)
+  {
+      vector&lt;int&gt; help(R-L+1);
+      int i = 0;
+      int p1 = L;
+      int p2 = M+1;
+      int res = 0;
+      while(p1&lt;=M &amp;&amp; p2 &lt;= R)
+      {
+          res += arr[p1] &gt; arr[p2] ? (r - p2 + 1):0;               //求逆序次数
+          help[i++] = arr[p1] &gt;= arr[p2] : arr[p1++] ? arr[p2++]; //逆排序
+      }
+      while(p1 &lt;= M)
+      {
+          help[i++] = arr[p1++];
+      }
+      while(p2 &lt;= R)
+      {
+          help[i++] = arr[p2++];
+      }
+      for (i = 0;i &lt; help.length;i++)
+      {
+          arr[L+i] = help[i];
+      }
+      help.release();
+      return res;
+  }
+
+
+  int process(vector&lt;int&gt; arr,int L,int R)
+  {
+      if(L == R)
+      {
+          return 0;            //递归出口
+      }
+      int mid = L+(R-L)&gt;&gt;1;
+      return process(arr,L,mid) 
+          +  process(arr,mid+1,R)
+          +  merge(arr,L,mid,R);
+
+  }
+
+  int reAlignmen(vector&lt;int&gt;&amp; arr)
+  {
+      if(arr == NULL || arr.size() &lt; 2)
+      {
+          return 0;
+      }
+      return process(arr,0,arr.size()-1);
+  }
+</code></pre><ul>
+<li><p>荷兰国旗：</p>
 <ul>
-<li>第一项</li>
-<li>第二项</li>
-<li>第三项</li>
+<li><p>给定一个数组arr，和一个数num，请把小于等于num的数放在数组的左边，大于num的 </p>
+<p>数放在数组的右边。要求额外空间复杂度O(1)，时间复杂度O(N)</p>
+</li>
+<li><p>流程</p>
+<blockquote>
+<p>[i] &lt;=num,[i]和&lt;=区的下一个数交换，&lt;=区右扩，i++</p>
+<p>[i]&gt;num,i++</p>
+<p><img src="/undefined/%E4%BF%A1%E5%B7%A6%E7%A5%9E%E6%8B%BFoffer(%E5%85%A5%E9%97%A8%E4%BA%8C)-19-12-30/2019/12/30/19-12/zuo2.2.png" alt></p>
+</blockquote>
+</li>
+<li><p>给定一个数组arr，和一个数num，请把小于num的数放在数组的 左边，等于num的数放 </p>
+<p>在数组的中间，大于num的数放在数组的 右边。要求额外空间复杂度O(1)，时间复杂度 </p>
+<p>O(N)</p>
+</li>
+<li><p>流程</p>
+<blockquote>
+<p>[i]&lt;num,[i]和&lt;区下一个交换，&lt;区右扩i++</p>
+<p>[i]==num,i++</p>
+<p>[i]&gt;num,[i]和&gt;区前一个交换，&gt;区左扩，i不变</p>
+<p><img src="/undefined/%E4%BF%A1%E5%B7%A6%E7%A5%9E%E6%8B%BFoffer(%E5%85%A5%E9%97%A8%E4%BA%8C)-19-12-30/2019/12/30/19-12/zuo2.1.png" alt></p>
+</blockquote>
+</li>
 </ul>
-</blockquote>
-<h1 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h1><pre><code class="lang-markdown">    &gt;最外层
-    &gt;&gt;第一层嵌套
-    &gt;&gt;&gt;第二层嵌套
-</code></pre>
-<blockquote>
-<p>最外层</p>
-<blockquote>
-<p>第一层嵌套</p>
-<blockquote>
-<p>第二层嵌套</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h1 id="代码区块"><a href="#代码区块" class="headerlink" title="代码区块"></a>代码区块</h1><p>在每一行前加上四个空格或制表符（Tab）</p>
-<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><pre><code class="lang-markdown">    回到[主页](https://wingsoffan.github.io/)
-    回到[主页][Link]
-    [Link]:https://wingsoffan.github.io/
-</code></pre>
-<blockquote>
-<p>回到<a href="https://wingsoffan.github.io/" target="_blank" rel="noopener">主页</a><br>回到[主页][Link]</p>
-<p>[Link]:<a href="https://wingsoffan.github.io" target="_blank" rel="noopener">https://wingsoffan.github.io</a></p>
-</blockquote>
-<h1 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h1><pre><code>    ![图片](markdown/fan.jpg)
-</code></pre><blockquote>
-<p><img src="/undefined/markdown-19-12-02/2019/12/02/fan.jpg" alt="alt 图片"></p>
-</blockquote>
-<h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><pre><code class="lang-markdown">    | 左对齐 | 右对齐 | 居中对齐 |
-    | :-----| ----: | :----: |
-    | 单元格 | 单元格 | 单元格 |
-    | 单元格 | 单元格 | 单元格 |
-</code></pre>
-<blockquote>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">左对齐</th>
-<th style="text-align:right">右对齐</th>
-<th style="text-align:center">居中对齐</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">单元格</td>
-<td style="text-align:right">单元格</td>
-<td style="text-align:center">单元格</td>
-</tr>
-<tr>
-<td style="text-align:left">单元格</td>
-<td style="text-align:right">单元格</td>
-<td style="text-align:center">单元格</td>
-</tr>
-</tbody>
-</table>
-</div>
-</blockquote>
+</li>
+<li><p>快速排序：</p>
+<ul>
+<li>1.0版：递归以每一个范围上的最后一个做划分，并将其交换到&lt;=区最后一个，每次即可确定一个数的位置</li>
+<li>2.0版: 递归以每一个范围上的最后一个做划分，并将其交换到=区，再递归&lt;区和&gt;区，每次即可确定一批数的位置</li>
+</ul>
+<p><em>前两个版面对最差的情况时，时间复杂度为O(nn)。划分值打的偏则，情况越差；划分值打在中点，情况越好O(nlogn)。</em></p>
+<ul>
+<li>3.0版:划分值在区域中随机选择，则避免了确定的最差情况，带入概率求期望后时间复杂度为O(nlogn)</li>
+</ul>
+<p>```c++<br>void swap(vector<int> arr,int a,int b)<br>{</int></p>
+<pre><code>int t = arr[a];
+arr[a] = arr[b];
+arr[b] = t ;
+</code></pre><p>}</p>
+<p>vector<int> partition(vector<int>&amp; arr,int L,int R)<br>{</int></int></p>
+<pre><code>int less = L-1; //
+int more = R;
+while(L &lt; more)
+{
+    if(arr[L] &lt; arr[R])
+    {
+        swap(arr,++less,L++);
+    }
+    else if (arr[L] &gt; arr[R] )
+    {
+        swap(arr,--more,L);
+    }
+    else
+    {
+        L++;
+    }
+}
+swap(arr,more,R);
+return vector&lt;int&gt;{less+1,more};
+</code></pre><p>}</p>
+</li>
+</ul>
+<p>  void quickSort(vector<int> arr,int L,int R)<br>  {<br>      if(L &lt; R)<br>      {<br>          swap(arr,L+rand()%(R-L+1),R);<br>          vector<int> p= partition(arr,L,R); //返回标志位<br>          quickSort(arr,L,p[0] - 1);<br>          quickSort(arr,p[1]+1,R);<br>      }<br>  }<br>  ```</int></int></p>
+<p>  <em>而外空间复杂度：O(logN)    同样是依赖概率来求的，最差为O(N)，最好为O(logN)。</em></p>
 
       
     </div>
@@ -501,7 +613,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
           
         </div>
       
@@ -514,8 +628,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/undefined/hello-world/2019/11/30/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/undefined/%E4%BF%A1%E5%B7%A6%E7%A5%9E%E6%8B%BFoffer(%E5%85%A5%E9%97%A8)-19-12-29/2019/12/29/" rel="next" title="信左神拿offer(入门一)">
+                <i class="fa fa-chevron-left"></i> 信左神拿offer(入门一)
               </a>
             
           </div>
@@ -523,10 +637,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/undefined/caffe-19-12-03/2019/12/03/" rel="prev" title="caffe(初识1)">
-                caffe(初识1) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -662,7 +772,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#标题设置"><span class="nav-number">1.</span> <span class="nav-text">标题设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用‘-’设置"><span class="nav-number">1.1.</span> <span class="nav-text">用‘#’设置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一级标题"><span class="nav-number">2.</span> <span class="nav-text">一级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二级标题"><span class="nav-number">2.1.</span> <span class="nav-text">二级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三级标题"><span class="nav-number">2.1.1.</span> <span class="nav-text">三级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#四级标题"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">四级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#五级标题"><span class="nav-number">2.1.1.1.1.</span> <span class="nav-text">五级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#六级标题"><span class="nav-number">2.1.1.1.1.1.</span> <span class="nav-text">六级标题</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用‘-’和‘-’设置"><span class="nav-number">2.2.</span> <span class="nav-text">用‘-’和‘=’设置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字体"><span class="nav-number">3.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分割线"><span class="nav-number">4.</span> <span class="nav-text">分割线</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">4.1.</span> <span class="nav-text">- - -</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除线"><span class="nav-number">5.</span> <span class="nav-text">删除线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下划线"><span class="nav-number">6.</span> <span class="nav-text">下划线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#脚注"><span class="nav-number">7.</span> <span class="nav-text">脚注</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表"><span class="nav-number">8.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#区块"><span class="nav-number">9.</span> <span class="nav-text">区块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码区块"><span class="nav-number">10.</span> <span class="nav-text">代码区块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链接"><span class="nav-number">11.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图片"><span class="nav-number">12.</span> <span class="nav-text">图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表格"><span class="nav-number">13.</span> <span class="nav-text">表格</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#信左神拿offer-入门二"><span class="nav-number">1.</span> <span class="nav-text">信左神拿offer(入门二)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#递归行为"><span class="nav-number">1.1.</span> <span class="nav-text">递归行为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">1.2.</span> <span class="nav-text">归并排序</span></a></li></ol></li></ol></div>
             
 
           </div>
